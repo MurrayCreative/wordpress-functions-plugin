@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Studio Manager
  * Plugin URI:        https://bitbucket.org/refreshdev/studio-manager-plugin
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This is a settings page that can be used to configure some common functionality for your WordPress site.
  * Version:           1.0.0
  * Author:            Murray Creative
  * Author URI:        http://murraycreative.ie
