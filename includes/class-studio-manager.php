@@ -164,6 +164,9 @@ class Studio_Manager {
 		// Save/Update our plugin options
 		$this->loader->add_action('admin_init', $plugin_admin, 'options_update');
 
+        //Admin Customizations
+        $this->loader->add_action( 'login_enqueue_scripts', $plugin_admin, 'studio_manager_login_css' );
+
 	}
 
 	/**

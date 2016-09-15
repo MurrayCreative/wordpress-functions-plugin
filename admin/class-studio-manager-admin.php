@@ -51,6 +51,7 @@ class Studio_Manager_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->studio_manager_options = get_option($this->plugin_name);
 
 	}
 
@@ -178,10 +179,35 @@ class Studio_Manager_Admin {
 		$valid['body_class_slug'] = (isset($input['body_class_slug']) && !empty($input['body_class_slug'])) ? 1 : 0;
 		$valid['jquery_cdn'] = (isset($input['jquery_cdn']) && !empty($input['jquery_cdn'])) ? 1 : 0;
 		$valid['cdn_provider'] = esc_url($input['cdn_provider']);
-		
+
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
 
 		return $valid;
 	}
+
+    /**
+     * Login page customizations Functions
+     *
+     * @since    1.0.0
+     */
+     private function studio_manager_login_logo_css(){
+         if(isset($this->studio_manager_options['login_logo_id']) && !empty($this->studio_manager_options['login_logo_id'])){
+             $login_logo = wp_get_attachment_image_src($this->studio_manager_options['login_logo_id'], 'thumbnail');
+             $login_logo_url = $login_logo[0];
+             $login_logo_css  = "body.login h1 a {background-image: url(".$login_logo_url."); width:100px; height:100px; background-size: contain;}";
+             return $login_logo_css;
+         }
+     }
+
+     // Write the actually needed css for login customizations
+     public function studio_manager_login_css(){
+         if( !empty($this->studio_manager_options['login_logo_id']) ){
+             echo '<style>';
+             if( !empty($this->studio_manager_options['login_logo_id'])){
+                   echo $this->studio_manager_login_logo_css();
+             }
+             echo '</style>';
+         }
+     }
 
 }
