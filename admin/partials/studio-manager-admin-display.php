@@ -16,8 +16,6 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
 
-	<?php echo '<h2>"settings_page_" + slug: '.get_current_screen()->id.'</h2>'; ?>
-
     <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
     <h2 class="nav-tab-wrapper">Clean up</h2>
