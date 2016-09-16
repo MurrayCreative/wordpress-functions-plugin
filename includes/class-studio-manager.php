@@ -190,6 +190,7 @@ class Studio_Manager {
 		$this->loader->add_action( 'init', $plugin_public, 'studio_manager' );
 		$this->loader->add_action( 'wp_loaded', $plugin_public, 'studio_manager_remove_comments_inline_styles' );
 		$this->loader->add_action( 'wp_loaded', $plugin_public, 'studio_manager_remove_gallery_styles' );
+		$this->loader->add_action( 'template_redirect', $plugin_public, 'studio_manager_prettify_search_redirect' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'studio_manager_cdn_jquery', PHP_INT_MAX );
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_admin_bar');
 

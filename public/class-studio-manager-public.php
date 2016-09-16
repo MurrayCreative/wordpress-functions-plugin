@@ -173,6 +173,20 @@ class Studio_Manager_Public {
         }
                 return $classes;
     }
+
+	// Prettify search
+	public function studio_manager_prettify_search_redirect() {
+		if(!empty($this->studio_manager_options['prettify_search'])){
+			global $wp_rewrite;
+			if ( !isset( $wp_rewrite ) || !is_object( $wp_rewrite ) || !$wp_rewrite->using_permalinks() ) return;
+
+			$search_base = $wp_rewrite->search_base;
+			if ( is_search() && !is_admin() && strpos( $_SERVER['REQUEST_URI'], "/{$search_base}/" ) === false ) {
+				wp_redirect( home_url( "/{$search_base}/" . urlencode( get_query_var( 's' ) ) ) );
+				exit();
+			}
+		}
+	}
     
     // Load jQuery from CDN if available
     public function studio_manager_cdn_jquery(){

@@ -169,6 +169,8 @@ class Studio_Manager_Admin {
 		$valid['jquery_cdn'] = (isset($input['jquery_cdn']) && !empty($input['jquery_cdn'])) ? 1 : 0;
 		$valid['cdn_provider'] = esc_url($input['cdn_provider']);
 		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
+		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
+		$valid['prettify_search'] = (isset($input['prettify_search']) && !empty($input['prettify_search'])) ? 1 : 0;
 
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
 

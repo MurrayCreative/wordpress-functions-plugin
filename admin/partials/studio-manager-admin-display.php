@@ -35,6 +35,7 @@
         $jquery_cdn = $options['jquery_cdn'];
         $cdn_provider = $options['cdn_provider'];
         $hide_admin_bar = $options['hide_admin_bar'];
+        $prettify_search = $options['prettify_search'];
 
 		//Login customization vars
 		$login_logo_id = isset($options['login_logo_id']) ? $options['login_logo_id'] : '';
@@ -91,6 +92,15 @@
 		<label for="<?php echo $this->plugin_name;?>-hide_admin_bar">
 			<input type="checkbox" id="<?php echo $this->plugin_name;?>-hide_admin_bar" name="<?php echo $this->plugin_name;?>[hide_admin_bar]" value="1" <?php checked( $hide_admin_bar, 1);?>/>
 			<span><?php esc_attr_e('Hide Admin Bar', $this->plugin_name);?></span>
+		</label>
+	</fieldset>
+
+	<!-- Prettify Search -->
+	<fieldset>
+		<legend class="screen-reader-text"><span><?php _e('Prettify search url - http://yourwebsite/search/search_terms/', $this->plugin_name);?></span></legend>
+		<label for="<?php echo $this->plugin_name;?>-prettify_search">
+			<input type="checkbox" id="<?php echo $this->plugin_name;?>-prettify_search" name="<?php echo $this->plugin_name;?>[prettify_search]" value="1" <?php checked($prettify_search, 1);?>/>
+			<span><?php esc_attr_e('Make search url pretty(ex: http://yourwebsite/search/search_terms/)', $this->plugin_name);?></span>
 		</label>
 	</fieldset>
 
