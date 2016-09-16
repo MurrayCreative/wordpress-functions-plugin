@@ -165,7 +165,7 @@ class Studio_Manager {
 		$this->loader->add_action('admin_init', $plugin_admin, 'options_update');
 
         //Admin Customizations
-        $this->loader->add_action( 'login_enqueue_scripts', $plugin_admin, 'studio_manager_login_css' );
+		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'studio_manager_admin_footer_text');
 
 	}
 
@@ -188,15 +188,17 @@ class Studio_Manager {
 		// Cleanup - Actions and filters
 		//Actions
 		$this->loader->add_action( 'init', $plugin_public, 'studio_manager' );
-		$this->loader->add_action( 'wp_loaded', $plugin_public, 'studio_manager_remove_comments_inline_styles' );
-		$this->loader->add_action( 'wp_loaded', $plugin_public, 'studio_manager_remove_gallery_styles' );
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'studio_manager_prettify_search_redirect' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'studio_manager_cdn_jquery', PHP_INT_MAX );
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_admin_bar');
+		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_cssjs_ver');
 
 		//Filters
 		$this->loader->add_filter( 'wp_headers', $plugin_public, 'studio_manager_remove_x_pingback' );
 		$this->loader->add_filter( 'body_class', $plugin_public, 'studio_manager_body_class_slug' );
+
+		//Images
+		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_add_images_size' );
 
 	}
 

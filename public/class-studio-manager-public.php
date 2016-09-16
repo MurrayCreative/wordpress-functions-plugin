@@ -140,28 +140,6 @@ class Studio_Manager_Public {
         }
     }
 
-    // Remove Comment inline CSS
-    public function studio_manager_remove_comments_inline_styles() {
-        if(!empty($this->studio_manager_options['comments_css_cleanup'])){
-            global $wp_widget_factory;
-            if ( has_filter( 'wp_head', 'wp_widget_recent_comments_style' ) ) {
-                remove_filter( 'wp_head', 'wp_widget_recent_comments_style' );
-            }
-
-            if ( isset($wp_widget_factory->widgets['WP_Widget_Recent_Comments']) ) {
-                remove_action( 'wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style') );
-            }
-        }
-    }
-
-    // Remove gallery inline CSS
-    public function studio_manager_remove_gallery_styles($css) {
-        if(!empty($this->studio_manager_options['gallery_css_cleanup'])){
-            return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
-        }
-
-    }
-
 
     // Add post/page slug
     public function studio_manager_body_class_slug( $classes ) {
@@ -187,30 +165,48 @@ class Studio_Manager_Public {
 			}
 		}
 	}
-    
-    // Load jQuery from CDN if available
-    public function studio_manager_cdn_jquery(){
-        if(!empty($this->studio_manager_options['jquery_cdn'])){
-            if(!is_admin()){
-                            if(!empty($this->studio_manager_options['cdn_provider'])){
-                                $link = $this->studio_manager_options['cdn_provider'];
-                            }else{
-                                $link = 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js';
-                            }
-                            $try_url = @fopen($link,'r');
-                            if( $try_url !== false ) {
-                                wp_deregister_script( 'jquery' );
-                                wp_register_script('jquery', $link, array(), null, false);
-                            }
-            }
-        }
-    }
+
+	// Remove  CSS and JS query strings versions
+	public function studio_manager_remove_cssjs_ver( ) {
+		if(!empty($this->studio_manager_options['css_js_versions'])){
+			function studio_manager_remove_cssjs_ver_filter($src ){
+				 if( strpos( $src, '?ver=' ) ) $src = remove_query_arg( 'ver', $src );
+				 return $src;
+			}
+			add_filter( 'style_loader_src', 'studio_manager_remove_cssjs_ver_filter', 10, 2 );
+			add_filter( 'script_loader_src', 'studio_manager_remove_cssjs_ver_filter', 10, 2 );
+		}
+	}
 
 	// Hide Admin Bar
 	public function studio_manager_remove_admin_bar(){
 		if(!empty($this->studio_manager_options['hide_admin_bar'])){
 			add_filter('show_admin_bar', '__return_false');
 		}
+	}
+
+
+	// Add new images size
+	public function studio_manager_add_images_size(){
+		if(is_array($this->studio_manager_options['images_size_arr'])):
+			foreach($this->studio_manager_options['images_size_arr'] as $images_size_name => $images_size):
+				$images_size_w =  $images_size['width'];
+				$images_size_h =  $images_size['height'];
+				$images_size_c =  ($images_size['crop'] == 1) ? true : false;
+				add_image_size( $images_size_name, $images_size_w, $images_size_h, $images_size_c );
+
+			endforeach;
+		endif;
+	}
+
+	// Add new image sizes to media size selection menu
+	public function studio_manager_image_size_names_choose( $sizes ) {
+		if(is_array($this->studio_manager_options['images_size_arr'])):
+			foreach($this->studio_manager_options['images_size_arr'] as $images_size_name => $images_size):
+				$sizes[$images_size_name] = $images_size['name'];
+			endforeach;
+		endif;
+		return $sizes;
 	}
 
 }

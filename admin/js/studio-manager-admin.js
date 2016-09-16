@@ -43,7 +43,8 @@
              imgContainer = $( '#upload_logo_preview' ),
              imgIdInput = $( '#login_logo_id' ),
              imgPreview = $('#upload_logo_preview'),
-             imgDelButton = $('#studio-manager-delete_logo_button');
+             imgDelButton = $('#studio-manager-delete_logo_button'),
+             $showChild = $(".show-child-if-checked");
 
 
         // wp.media add Image
@@ -95,6 +96,15 @@
             imgPreview.find( 'img' ).attr( 'src', '' );
             imgPreview.addClass('hidden');
         });
+
+	 	// Fields showing after parent is checked
+		$showChild.on('change', function() {
+		    if(this.checked) {
+			$(this).parent().next('fieldset').removeClass('hidden');
+		    }else{
+			$(this).parent().next('fieldset').addClass('hidden');
+		    }
+		});
 
     }); // End of DOM Ready
 

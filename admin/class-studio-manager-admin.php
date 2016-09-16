@@ -163,16 +163,71 @@ class Studio_Manager_Admin {
 
 		// Cleanup
 		$valid['cleanup'] = (isset($input['cleanup']) && !empty($input['cleanup'])) ? 1 : 0;
-		$valid['comments_css_cleanup'] = (isset($input['comments_css_cleanup']) && !empty($input['comments_css_cleanup'])) ? 1: 0;
-		$valid['gallery_css_cleanup'] = (isset($input['gallery_css_cleanup']) && !empty($input['gallery_css_cleanup'])) ? 1 : 0;
 		$valid['body_class_slug'] = (isset($input['body_class_slug']) && !empty($input['body_class_slug'])) ? 1 : 0;
-		$valid['jquery_cdn'] = (isset($input['jquery_cdn']) && !empty($input['jquery_cdn'])) ? 1 : 0;
-		$valid['cdn_provider'] = esc_url($input['cdn_provider']);
 		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
 		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
 		$valid['prettify_search'] = (isset($input['prettify_search']) && !empty($input['prettify_search'])) ? 1 : 0;
+		$valid['css_js_versions'] = (isset($input['css_js_versions']) && !empty($input['css_js_versions'])) ? 1 : 0;
 
+
+		// Login Logo
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
+
+
+        // New images sizes
+        if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {
+            $existing_images_sizes = $input['existing_images_size'];
+            foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
+                $existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
+            endforeach;
+        }else{
+            $existing_images_sizes = array();
+        }
+        $new_images_size = array();
+
+        if(isset( $input['new_images_size']) &&  !empty($input['new_images_size']) ){
+            $images_size_slug = sanitize_title($input['images_size']['name']);
+            $images_size_name = sanitize_text_field($input['images_size']['name']);
+            if(empty($images_size_slug)){
+                add_settings_error(
+                        'new_images_size_error',                     // Setting title
+                        'new_images_size_error_texterror',            // Error ID
+                        __('Please enter a new images size name', $this->plugin_name),    // Error message
+                        'error'                         // Type of message
+                );
+            }else{
+                $new_images_size[$images_size_slug]['name'] = $images_size_name;
+                $new_images_size[$images_size_slug]['width'] = sanitize_text_field($input['images_size']['width']);
+                if(empty($new_images_size[$images_size_slug]['width'])){
+                    add_settings_error(
+                            'new_images_size_width_error',                     // Setting title
+                            'new_images_size_width_error_texterror',            // Error ID
+                            __('Please enter a width to '.$images_size_name.' images size', $this->plugin_name),    // Error message
+                            'error'                         // Type of message
+                    );
+                }
+
+                $new_images_size[$images_size_slug]['height'] = sanitize_text_field($input['images_size']['height']);
+                if(empty($new_images_size[$images_size_slug]['height'])){
+                    add_settings_error(
+                            'new_images_size_heigth_error',                     // Setting title
+                            'new_images_size_heigth_error_texterror',            // Error ID
+                            __('Please enter a height to '.$images_size_name.' images sizes', $this->plugin_name),     // Error message
+                            'error'                         // Type of message
+                    );
+                }
+                $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
+
+            }
+        }
+        if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height'])){
+                $valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
+        }else{
+            $valid['images_size_arr'] = $existing_images_sizes;
+        }
+
+        //Admin Customisations
+        $valid['admin_footer_text'] = (isset($input['admin_footer_text']) && !empty($input['admin_footer_text'])) ? wp_kses($input['admin_footer_text'], array('a' => array( 'href' => array(), 'title' => array()))) : '';
 
 		return $valid;
 	}
@@ -201,5 +256,20 @@ class Studio_Manager_Admin {
              echo '</style>';
          }
      }
+
+    /**
+     * Admin customizations Functions
+     *
+     * @since    1.0.0
+     */
+
+
+    public function studio_manager_admin_footer_text($footer_text){
+        if(!empty($this->studio_manager_options['admin_footer_text'])){
+            $footer_text = $this->studio_manager_options['admin_footer_text'];
+        }
+        return $footer_text;
+    }
+
 
 }
