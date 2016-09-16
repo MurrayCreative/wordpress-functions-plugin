@@ -228,6 +228,7 @@ class Studio_Manager_Admin {
 
         //Admin Customisations
         $valid['admin_footer_text'] = (isset($input['admin_footer_text']) && !empty($input['admin_footer_text'])) ? wp_kses($input['admin_footer_text'], array('a' => array( 'href' => array(), 'title' => array()))) : '';
+        $valid['remove_admin_bar_icon'] = (isset($input['remove_admin_bar_icon']) && !empty($input['remove_admin_bar_icon'])) ? 1 : 0;
 
 		return $valid;
 	}
@@ -269,6 +270,13 @@ class Studio_Manager_Admin {
             $footer_text = $this->studio_manager_options['admin_footer_text'];
         }
         return $footer_text;
+    }
+
+    public function studio_manager_remove_wp_icon_from_admin_bar() {
+        if(!empty($this->studio_manager_options['remove_admin_bar_icon'])){
+            global $wp_admin_bar;
+            $wp_admin_bar->remove_menu('wp-logo');
+        }
     }
 
 

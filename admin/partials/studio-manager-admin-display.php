@@ -47,6 +47,7 @@
 
 				//Admin Customisations
 				$admin_footer_text  = $options['admin_footer_text'];
+				$remove_admin_bar_icon = $options['remove_admin_bar_icon'];
 		        
 		    ?>
 
@@ -215,6 +216,14 @@
 			</fieldset>
 
 
+			<!-- Remove wp icon from admin bar -->
+			<fieldset>
+				<legend class="screen-reader-text"><span><?php _e('Remove WordPress Icon from admin bar', $this->plugin_name);?></span></legend>
+				<label for="<?php echo $this->plugin_name;?>-remove_admin_bar_icon">
+					<input type="checkbox" id="<?php echo $this->plugin_name;?>-remove_admin_bar_icon" name="<?php echo $this->plugin_name;?>[remove_admin_bar_icon]" value="1" <?php checked($remove_admin_bar_icon, 1);?>/>
+					<span><?php esc_attr_e('Remove WordPress Icon from admin bar', $this->plugin_name);?></span>
+				</label>
+			</fieldset>
 
 
 		    <?php submit_button(__('Save all changes', $this->plugin_name), 'primary','submit', TRUE); ?>
