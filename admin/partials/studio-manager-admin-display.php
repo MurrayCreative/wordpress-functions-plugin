@@ -34,6 +34,7 @@
         $body_class_slug = $options['body_class_slug'];
         $jquery_cdn = $options['jquery_cdn'];
         $cdn_provider = $options['cdn_provider'];
+        $hide_admin_bar = $options['hide_admin_bar'];
 
 		//Login customization vars
 		$login_logo_id = isset($options['login_logo_id']) ? $options['login_logo_id'] : '';
@@ -83,6 +84,15 @@
             <span><?php esc_attr_e('Add Post slug to body class', $this->plugin_name);?></span>
         </label>
     </fieldset>
+
+	<!-- Hide Admin Bar -->
+	<fieldset>
+		<legend class="screen-reader-text"><span><?php _e('Hide Admin Bar on the Front-end', $this->plugin_name);?></span></legend>
+		<label for="<?php echo $this->plugin_name;?>-hide_admin_bar">
+			<input type="checkbox" id="<?php echo $this->plugin_name;?>-hide_admin_bar" name="<?php echo $this->plugin_name;?>[hide_admin_bar]" value="1" <?php checked( $hide_admin_bar, 1);?>/>
+			<span><?php esc_attr_e('Hide Admin Bar', $this->plugin_name);?></span>
+		</label>
+	</fieldset>
 
     <!-- load jQuery from CDN -->
     <fieldset>

@@ -189,4 +189,11 @@ class Studio_Manager_Public {
         }
     }
 
+	// Hide Admin Bar
+	public function studio_manager_remove_admin_bar(){
+		if(!empty($this->studio_manager_options['hide_admin_bar'])){
+			add_filter('show_admin_bar', '__return_false');
+		}
+	}
+
 }

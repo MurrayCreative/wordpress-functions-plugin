@@ -191,6 +191,7 @@ class Studio_Manager {
 		$this->loader->add_action( 'wp_loaded', $plugin_public, 'studio_manager_remove_comments_inline_styles' );
 		$this->loader->add_action( 'wp_loaded', $plugin_public, 'studio_manager_remove_gallery_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'studio_manager_cdn_jquery', PHP_INT_MAX );
+		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_admin_bar');
 
 		//Filters
 		$this->loader->add_filter( 'wp_headers', $plugin_public, 'studio_manager_remove_x_pingback' );

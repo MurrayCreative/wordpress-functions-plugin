@@ -39,10 +39,10 @@
 
          // Let's set up some variables for the image upload and removing the image     
          var frame,
-             imgUploadButton = $( '#upload_login_logo_button' ),    
+             imgUploadButton = $( '#upload_login_logo_button' ),
              imgContainer = $( '#upload_logo_preview' ),
              imgIdInput = $( '#login_logo_id' ),
-             imgPreview = $('#upload_logo_preview'),        
+             imgPreview = $('#upload_logo_preview'),
              imgDelButton = $('#studio-manager-delete_logo_button');
 
 

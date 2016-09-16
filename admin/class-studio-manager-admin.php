@@ -76,12 +76,6 @@ class Studio_Manager_Admin {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/studio-manager-admin.css', array(), $this->version, 'all' );
 
-         if ( 'settings_page_studio-manager' == get_current_screen() -> id ) {
-             // CSS stylesheet for Color Picker
-             wp_enqueue_style( 'wp-color-picker' );            
-             wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/studio-manager-admin.css', array( 'wp-color-picker' ), $this->version, 'all' );
-         }
-
 	}
 
 	/**
@@ -104,11 +98,6 @@ class Studio_Manager_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/studio-manager-admin.js', array( 'jquery' ), $this->version, false );
-
-        if ( 'settings_page_studio-manager' == get_current_screen() -> id ) {
-            wp_enqueue_media();   
-            wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/studio-manager-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );         
-        }
 
 	}
 
@@ -179,6 +168,7 @@ class Studio_Manager_Admin {
 		$valid['body_class_slug'] = (isset($input['body_class_slug']) && !empty($input['body_class_slug'])) ? 1 : 0;
 		$valid['jquery_cdn'] = (isset($input['jquery_cdn']) && !empty($input['jquery_cdn'])) ? 1 : 0;
 		$valid['cdn_provider'] = esc_url($input['cdn_provider']);
+		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
 
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
 
