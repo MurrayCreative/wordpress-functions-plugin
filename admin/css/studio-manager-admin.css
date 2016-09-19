@@ -4,13 +4,23 @@
  */
 
 /* General */
+.section-wrapper {
+	margin-bottom: 1em;
+	padding: 1em;
+	border: solid 1px #b4b9be;
+}
+
 .section-title {
-	margin-top: 40px;
+	margin-top: 1em;
 }
 
 .section-subheading {
 	margin-top: 20px;
 	font-size: 1.1em;
+}
+
+.action-subheading {
+	font-size: 1em;
 }
 
 .studio_manager-metaboxes fieldset{

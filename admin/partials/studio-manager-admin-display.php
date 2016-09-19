@@ -53,195 +53,207 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="wrap">
 
-    <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
-    <div id="clean-up" class="wrap metabox-holder columns-2 studio_manager-metaboxes">
+	<div id="clean-up" class="wrap metabox-holder columns-2 studio_manager-metaboxes">
 
-	    <form method="post" name="cleanup_options" action="options.php">
+		<form method="post" name="cleanup_options" action="options.php">
 
-	    	<h2 class="section-title"><?php _e('Clean Up', $this->plugin_name);?></h2>
-
-		    <?php
-		        settings_fields( $this->plugin_name );
-		        do_settings_sections( $this->plugin_name );
-		    ?>
-
-		    <!-- remove some meta and generators from the <head> -->
-		    <fieldset>
-		        <legend class="screen-reader-text"><span><?php _e('Clean WordPress head section', $this->plugin_name);?></span></legend>
-		        <label for="<?php echo $this->plugin_name;?>-cleanup">
-		            <input type="checkbox" id="<?php echo $this->plugin_name;?>-cleanup" name="<?php echo $this->plugin_name;?>[cleanup]" value="1" <?php checked( $cleanup, 1 ); ?> />
-		            <span><?php esc_attr_e( 'Clean up the head section', $this->plugin_name ); ?></span>
-		        </label>
-		    </fieldset>
-
-
-		    <!-- add post,page or product slug class to body class -->
-		    <fieldset>
-		        <legend class="screen-reader-text"><span><?php _e('Add Post, page or product slug to body class', $this->plugin_name);?></span></legend>
-		        <label for="<?php echo $this->plugin_name;?>-body_class_slug">
-		            <input type="checkbox" id="<?php echo $this->plugin_name;?>-body_class_slug" name="<?php echo $this->plugin_name;?>[body_class_slug]" value="1" <?php checked( $body_class_slug, 1 ); ?>  />
-		            <span><?php esc_attr_e('Add Post slug to body class', $this->plugin_name);?></span>
-		        </label>
-		    </fieldset>
-
-
-			<!-- Prettify Search URL -->
-			<fieldset>
-				<legend class="screen-reader-text"><span><?php _e('Prettify Search URL - http://yourwebsite/search/search_terms/', $this->plugin_name);?></span></legend>
-				<label for="<?php echo $this->plugin_name;?>-prettify_search">
-					<input type="checkbox" id="<?php echo $this->plugin_name;?>-prettify_search" name="<?php echo $this->plugin_name;?>[prettify_search]" value="1" <?php checked($prettify_search, 1);?>/>
-					<span><?php esc_attr_e('Prettify Search URL (eg: http://yourwebsite/search/search_terms/)', $this->plugin_name);?></span>
-				</label>
-			</fieldset>
-
-
-			<!-- Hide Admin Bar -->
-			<fieldset>
-				<legend class="screen-reader-text"><span><?php _e('Hide Admin Bar on the Front-end', $this->plugin_name);?></span></legend>
-				<label for="<?php echo $this->plugin_name;?>-hide_admin_bar">
-					<input type="checkbox" id="<?php echo $this->plugin_name;?>-hide_admin_bar" name="<?php echo $this->plugin_name;?>[hide_admin_bar]" value="1" <?php checked( $hide_admin_bar, 1);?>/>
-					<span><?php esc_attr_e('Hide Admin Bar', $this->plugin_name);?></span>
-				</label>
-			</fieldset>
-
-
-			<!-- remove css and js query string versions -->
-			<fieldset>
-				<legend class="screen-reader-text"><span><?php _e('Remove CSS and JS files query string versions', $this->plugin_name);?></span></legend>
-				<label for="<?php echo $this->plugin_name;?>-css_js_versions">
-					<input type="checkbox" id="<?php echo $this->plugin_name;?>-css_js_versions" name="<?php echo $this->plugin_name;?>[css_js_versions]" value="1" <?php checked($css_js_versions, 1);?>/>
-					<span><?php esc_attr_e('Remove CSS and JS versions (uncheck for dev)', $this->plugin_name);?></span>
-				</label>
-			</fieldset>
-
-
-		    <!-- Login page customizations -->
-			<h2 class="section-title"><?php _e('Login customization', $this->plugin_name);?></h2>
-
-	        <h3 class="section-subheading"><?php _e('Add logo to login form change buttons and background color', $this->plugin_name);?></h3>
-
-
-	        <!-- add your logo to login -->
-	        <fieldset>
-	            <legend class="screen-reader-text"><span><?php esc_attr_e('Login Logo', $this->plugin_name);?></span></legend>
-	            <label for="<?php echo $this->plugin_name;?>-login_logo">
-	                <input type="hidden" id="login_logo_id" name="<?php echo $this->plugin_name;?>[login_logo_id]" value="<?php echo $login_logo_id; ?>" />
-	                <input id="upload_login_logo_button" type="button" class="button" value="<?php _e( 'Upload Logo', $this->plugin_name); ?>" />
-	                <span><?php esc_attr_e('Login Logo', $this->plugin_name);?></span>
-	            </label>
-	            <div id="upload_logo_preview" class="studio-manager-upload-preview <?php if(empty($login_logo_id)) echo 'hidden'?>">
-	                <img src="<?php echo $login_logo_url; ?>" />
-	                <button id="studio-manager-delete_logo_button" class="studio-manager-delete-image">X</button>
-	            </div>
-	        </fieldset>
-
-		    
-			<!-- Add images sizes -->
-			<h2 class="section-title"><?php _e('Custom Image Sizes', $this->plugin_name);?></h2>
-
-	        <h3 class="section-subheading"><?php _e('Add custom image sizes for media images', $this->plugin_name);?></h3>
-
-			<?php global $_wp_additional_image_sizes;
-				  $img_sizes = get_intermediate_image_sizes();
-				  $new_images_size_position = count($_wp_additional_image_sizes);
+			<?php
+				settings_fields( $this->plugin_name );
+				do_settings_sections( $this->plugin_name );
 			?>
 
-			<fieldset>
-				<p><?php __( 'Add your new images size with desired width, height and hard cropping option', $this->plugin_name);?></p>
-				<legend class="screen-reader-text"><span><?php _e('Add New Image sizes', $this->plugin_name);?></span></legend>
-				<label for="<?php echo $this->plugin_name;?>-new_images_size">
-					<input type="checkbox" id="<?php echo $this->plugin_name;?>-new_images_size" class="show-child-if-checked" name="<?php echo $this->plugin_name;?>[new_images_size]" value="1" <?php checked($new_images_size, 1);?>/>
-					<span><?php esc_attr_e('Add New Image size', $this->plugin_name);?></span>
-				</label>
-				<fieldset class="new-images-size <?php if($new_images_size != '1') echo 'hidden'; ?>">
-					<label for="<?php echo $this->plugin_name;?>-new_images_size_name">
-						<input id="<?php echo $this->plugin_name;?>-new_images_size_name" name="<?php echo $this->plugin_name;?>[images_size][name]" type="text" placeholder="ex: blog_featured">
-						<span><?php esc_attr_e('New Images size name', $this->plugin_name);?></span>
+			<!-- Clean Ups -->
+			<div class="section-wrapper">
+				<h2 class="section-title"><?php _e('Clean Up', $this->plugin_name);?></h2>
+
+				<!-- remove some meta and generators from the <head> -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Clean WordPress head section', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-cleanup">
+					<input type="checkbox" id="<?php echo $this->plugin_name;?>-cleanup" name="<?php echo $this->plugin_name;?>[cleanup]" value="1" <?php checked( $cleanup, 1 ); ?> />
+					<span><?php esc_attr_e( 'Clean up the head section', $this->plugin_name ); ?></span>
+					</label>
+				</fieldset>
+
+
+				<!-- add post,page or product slug class to body class -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Add Post, page or product slug to body class', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-body_class_slug">
+					<input type="checkbox" id="<?php echo $this->plugin_name;?>-body_class_slug" name="<?php echo $this->plugin_name;?>[body_class_slug]" value="1" <?php checked( $body_class_slug, 1 ); ?>  />
+					<span><?php esc_attr_e('Add Post slug to body class', $this->plugin_name);?></span>
+					</label>
+				</fieldset>
+
+
+				<!-- Prettify Search URL -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Prettify Search URL - http://yourwebsite/search/search_terms/', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-prettify_search">
+						<input type="checkbox" id="<?php echo $this->plugin_name;?>-prettify_search" name="<?php echo $this->plugin_name;?>[prettify_search]" value="1" <?php checked($prettify_search, 1);?>/>
+						<span><?php esc_attr_e('Prettify Search URL (eg: http://yourwebsite/search/search_terms/)', $this->plugin_name);?></span>
+					</label>
+				</fieldset>
+
+
+				<!-- Hide Admin Bar -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Hide Admin Bar on the Front-end', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-hide_admin_bar">
+						<input type="checkbox" id="<?php echo $this->plugin_name;?>-hide_admin_bar" name="<?php echo $this->plugin_name;?>[hide_admin_bar]" value="1" <?php checked( $hide_admin_bar, 1);?>/>
+						<span><?php esc_attr_e('Hide Admin Bar', $this->plugin_name);?></span>
+					</label>
+				</fieldset>
+
+
+				<!-- remove css and js query string versions -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Remove CSS and JS files query string versions', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-css_js_versions">
+						<input type="checkbox" id="<?php echo $this->plugin_name;?>-css_js_versions" name="<?php echo $this->plugin_name;?>[css_js_versions]" value="1" <?php checked($css_js_versions, 1);?>/>
+						<span><?php esc_attr_e('Remove CSS and JS versions (uncheck for dev)', $this->plugin_name);?></span>
+					</label>
+				</fieldset>
+			</div>
+
+
+			<!-- Login page customizations -->
+			<div class="section-wrapper">
+				<h2 class="section-title"><?php _e('Login customization', $this->plugin_name);?></h2>
+
+				<!-- Add client logo to login -->
+				<fieldset>
+					<h3 class="section-subheading"><?php _e('Add logo to login form', $this->plugin_name);?></h3>
+					<legend class="screen-reader-text"><span><?php esc_attr_e('Login Logo', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-login_logo">
+					<input type="hidden" id="login_logo_id" name="<?php echo $this->plugin_name;?>[login_logo_id]" value="<?php echo $login_logo_id; ?>" />
+					<input id="upload_login_logo_button" type="button" class="button" value="<?php _e( 'Upload Logo', $this->plugin_name); ?>" />
+					<span><?php esc_attr_e('Login Logo', $this->plugin_name);?></span>
+					</label>
+					<div id="upload_logo_preview" class="studio-manager-upload-preview <?php if(empty($login_logo_id)) echo 'hidden'?>">
+						<img src="<?php echo $login_logo_url; ?>" />
+						<button id="studio-manager-delete_logo_button" class="studio-manager-delete-image">X</button>
+					</div>
+				</fieldset>
+	        </div>
+
+		    
+			<!-- Custom Image Sizes -->
+			<div class="section-wrapper">
+				<h2 class="section-title"><?php _e('Custom Image Sizes', $this->plugin_name);?></h2>
+
+				<?php global $_wp_additional_image_sizes;
+					$img_sizes = get_intermediate_image_sizes();
+					$new_images_size_position = count($_wp_additional_image_sizes);
+				?>
+
+				<!-- Add images sizes -->
+				<fieldset>
+					<h3 class="section-subheading"><?php _e('Add custom image sizes for media images', $this->plugin_name);?></h3>
+					<legend class="screen-reader-text"><span><?php _e('Add New Image sizes', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-new_images_size">
+						<input type="checkbox" id="<?php echo $this->plugin_name;?>-new_images_size" class="show-child-if-checked" name="<?php echo $this->plugin_name;?>[new_images_size]" value="1" <?php checked($new_images_size, 1);?>/>
+						<span><?php esc_attr_e('Add New Image size', $this->plugin_name);?></span>
+					</label>
+					<fieldset class="new-images-size <?php if($new_images_size != '1') echo 'hidden'; ?>">
+						<label for="<?php echo $this->plugin_name;?>-new_images_size_name">
+							<input id="<?php echo $this->plugin_name;?>-new_images_size_name" name="<?php echo $this->plugin_name;?>[images_size][name]" type="text" placeholder="ex: blog_featured">
+							<span><?php esc_attr_e('New Images size name', $this->plugin_name);?></span>
+						</label>
+						<br/>
+						<label for="t<?php echo $this->plugin_name;?>-new_images_size_w">Width</label>
+						<input name="<?php echo $this->plugin_name;?>[images_size][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_w" placeholder="500" class="small-text">
+						<label for="<?php echo $this->plugin_name;?>-new_images_size_h">Height</label>
+						<input name="<?php echo $this->plugin_name;?>[images_size][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_h" placeholder="300"  class="small-text">
+						<br>
+						<label for="<?php echo $this->plugin_name;?>-new_images_size_crop">
+							<input name="<?php echo $this->plugin_name;?>[images_size][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-new_images_size_crop">
+							<span><?php esc_attr_e('Crop thumbnail to exact dimensions (normally thumbnails are proportional)',  $this->plugin_name);?></span>
+						</label>
+					</fieldset>
+
+					<fieldset class="existing-images-size-container <?php if($new_images_size_position < 2) echo 'hidden'; ?>">
+						<h4 class="action-subheading"><?php _e('Already Existing Custom Images sizes', $this->plugin_name);?></h4>
+						<?php
+							if(is_array($images_size_arr)):
+								foreach ($images_size_arr as $existing_images_size_name => $existing_images_size_values) :?>
+							
+								<?php
+									if($existing_images_size_name != 'post-thumbnail'):?>
+										<fieldset class="existing-images-size">
+											<h4><?php echo $existing_images_size_name;?></h4>
+											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_w">Width</label>
+											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][name]" type="hidden" value="<?php echo $existing_images_size_values['name'];?>" >
+											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_w" value="<?php echo $existing_images_size_values['width'];?>" class="small-text" >
+											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h">Height</label>
+											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h" value="<?php echo $existing_images_size_values['height'];?>" class="small-text">
+											<br>
+											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop">
+											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop" <?php checked($existing_images_size_values['crop'], 1);?> >
+											<span><?php esc_attr_e('Crop thumbnail to exact dimensions (normally thumbnails are proportional)',  $this->plugin_name);?></span>
+											</label>
+										</fieldset>
+									<?php endif;?>
+								<?php endforeach;?>
+							<?php endif;?>
+					</fieldset>
+				</fieldset>
+			</div>
+
+		    
+			<!-- Custom Image Sizes -->
+			<div class="section-wrapper">
+				<h2 class="section-title"><?php _e('Admin Customisations', $this->plugin_name);?></h2>
+
+				<!-- Hide WordPress admin menu items -->
+				<fieldset class="studio_manager-admin-menu-items">
+					<legend class="screen-reader-text"><span><?php _e('Hide Admin menu items for editors', $this->plugin_name);?></span></legend>
+					<h3 class="section-subheading"><?php esc_attr_e('Hide Admin menu items for editors', $this->plugin_name);?></h3>
+					<?php
+						foreach($all_menu_items as $menu_key => $menu_value):
+							if($menu_value[0]):
+								$re = "/(<span.*<\\/span>)/mi"; 
+								$menu_label = preg_replace($re, '', $menu_value[0]);
+								$menu_slug = $menu_value[2];
+								$menu_arr = esc_html(serialize($menu_value));
+								//$menu_arr = esc_html(json_encode($menu_value));
+					?>
+					<label for="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>">
+					<input type="checkbox" id="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>" name="<?php echo $this->plugin_name;?>[admin_menu_items][<?php echo $menu_key; ?>]" value="1" <?php checked($menu_value['hidden'], 1);?>/>
+					<input type="hidden" name="<?php echo $this->plugin_name;?>[admin_menu_items_val][<?php echo $menu_key; ?>]" value='<?php echo $menu_arr?>' >
+					<span><?php esc_attr_e("Hide ".$menu_label." menu item", $this->plugin_name);?></span>
 					</label>
 					<br/>
-					<label for="t<?php echo $this->plugin_name;?>-new_images_size_w">Width</label>
-					<input name="<?php echo $this->plugin_name;?>[images_size][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_w" placeholder="500" class="small-text">
-					<label for="<?php echo $this->plugin_name;?>-new_images_size_h">Height</label>
-					<input name="<?php echo $this->plugin_name;?>[images_size][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_h" placeholder="300"  class="small-text">
-					<br>
-					<label for="<?php echo $this->plugin_name;?>-new_images_size_crop">
-						<input name="<?php echo $this->plugin_name;?>[images_size][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-new_images_size_crop">
-						<span><?php esc_attr_e('Crop thumbnail to exact dimensions (normally thumbnails are proportional)',  $this->plugin_name);?></span>
+					<?php
+							endif;
+						endforeach;
+					?>
+				</fieldset>
+
+
+				<!-- Change WordPress admin footer text -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Change Admin footer text with your own', $this->plugin_name);?></span></legend>
+					<h3 class="section-subheading"><?php esc_attr_e('Change Admin footer text with your own', $this->plugin_name);?></h3>
+					<input type="text" class="regular-text" id="<?php echo $this->plugin_name;?>-admin_footer_text" name="<?php echo $this->plugin_name;?>[admin_footer_text]" value="<?php if(!empty($admin_footer_text)) esc_attr_e($admin_footer_text, $this->plugin_name);?>" placeholder="<?php esc_attr_e('Theme created for your awesome business', $this->plugin_name);?>" />
+				</fieldset>
+
+
+				<!-- Remove wp icon from admin bar -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Remove WordPress Icon from admin bar', $this->plugin_name);?></span></legend>
+					<h3 class="section-subheading"><?php esc_attr_e('Remove WordPress Icon from admin bar', $this->plugin_name);?></h3>
+					<label for="<?php echo $this->plugin_name;?>-remove_admin_bar_icon">
+						<input type="checkbox" id="<?php echo $this->plugin_name;?>-remove_admin_bar_icon" name="<?php echo $this->plugin_name;?>[remove_admin_bar_icon]" value="1" <?php checked($remove_admin_bar_icon, 1);?>/>
+						<span><?php esc_attr_e('Remove WordPress Icon', $this->plugin_name);?></span>
 					</label>
 				</fieldset>
-				<fieldset class="existing-images-size-container <?php if($new_images_size_position < 2) echo 'hidden'; ?>">
-		            <h3 class="section-subheading"><?php _e('Already Existing Images sizes', $this->plugin_name);?></h3>
-		                <?php
-		                if(is_array($images_size_arr)):
-		                    foreach ($images_size_arr as $existing_images_size_name => $existing_images_size_values) :?>
-						
-							<?php
-								if($existing_images_size_name != 'post-thumbnail'):?>
-									<fieldset class="existing-images-size">
-										<h4><?php echo $existing_images_size_name;?></h4>
-										<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_w">Width</label>
-										<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][name]" type="hidden" value="<?php echo $existing_images_size_values['name'];?>" >
-										<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_w" value="<?php echo $existing_images_size_values['width'];?>" class="small-text" >
-										<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h">Height</label>
-										<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h" value="<?php echo $existing_images_size_values['height'];?>" class="small-text">
-										<br>
-										<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop">
-										<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop" <?php checked($existing_images_size_values['crop'], 1);?> >
-										<span><?php esc_attr_e('Crop thumbnail to exact dimensions (normally thumbnails are proportional)',  $this->plugin_name);?></span>
-										</label>
-									</fieldset>
-								<?php endif;?>
-							<?php endforeach;?>
-						<?php endif;?>
-				</fieldset>
-			</fieldset>
-
-		    
-			<!-- Admin Area Customisation -->
-			<h2 class="section-title"><?php _e('Admin Customisations', $this->plugin_name);?></h2>
-
-			<!-- Change WordPress admin footer text -->
-			<fieldset>
-				<legend class="screen-reader-text"><span><?php _e('Change Admin footer text with your own', $this->plugin_name);?></span></legend>
-				<h3 class="section-subheading"><?php esc_attr_e('Change Admin footer text with your own', $this->plugin_name);?></h3>
-				<input type="text" class="regular-text" id="<?php echo $this->plugin_name;?>-admin_footer_text" name="<?php echo $this->plugin_name;?>[admin_footer_text]" value="<?php if(!empty($admin_footer_text)) esc_attr_e($admin_footer_text, $this->plugin_name);?>" placeholder="<?php esc_attr_e('Theme created for your awesome business', $this->plugin_name);?>" />
-			</fieldset>
+			</div>
 
 
-			<!-- Remove wp icon from admin bar -->
-			<fieldset>
-				<legend class="screen-reader-text"><span><?php _e('Remove WordPress Icon from admin bar', $this->plugin_name);?></span></legend>
-				<h3 class="section-subheading"><?php esc_attr_e('Remove WordPress Icon from admin bar', $this->plugin_name);?></h3>
-				<label for="<?php echo $this->plugin_name;?>-remove_admin_bar_icon">
-					<input type="checkbox" id="<?php echo $this->plugin_name;?>-remove_admin_bar_icon" name="<?php echo $this->plugin_name;?>[remove_admin_bar_icon]" value="1" <?php checked($remove_admin_bar_icon, 1);?>/>
-					<span><?php esc_attr_e('Remove WordPress Icon', $this->plugin_name);?></span>
-				</label>
-			</fieldset>
-
-
-			<!-- Hide WordPress admin menu items -->
-			<fieldset class="studio_manager-admin-menu-items">
-			<legend class="screen-reader-text"><span><?php _e('Hide Admin menu items for editors', $this->plugin_name);?></span></legend>
-			<h3 class="section-subheading"><?php esc_attr_e('Hide Admin menu items for editors', $this->plugin_name);?></h3>
-			<?php foreach($all_menu_items as $menu_key => $menu_value):
-			        if($menu_value[0]):
-			          $re = "/(<span.*<\\/span>)/mi"; 
-			          $menu_label = preg_replace($re, '', $menu_value[0]);
-			          $menu_slug = $menu_value[2];
-			          $menu_arr = esc_html(serialize($menu_value));
-			          //$menu_arr = esc_html(json_encode($menu_value));
-			?>
-			  <label for="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>">
-			    <input type="checkbox" id="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>" name="<?php echo $this->plugin_name;?>[admin_menu_items][<?php echo $menu_key; ?>]" value="1" <?php checked($menu_value['hidden'], 1);?>/>
-			    <input type="hidden" name="<?php echo $this->plugin_name;?>[admin_menu_items_val][<?php echo $menu_key; ?>]" value='<?php echo $menu_arr?>' >
-			    <span><?php esc_attr_e("Hide ".$menu_label." menu item", $this->plugin_name);?></span>
-			  </label><br/>
-			<?php endif; endforeach;?>
-			</fieldset>
-
-
-		    <?php submit_button(__('Save all changes', $this->plugin_name), 'primary','submit', TRUE); ?>
+			<?php submit_button(__('Save all changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 
 		</form>
 
