@@ -168,6 +168,8 @@ class Studio_Manager {
 		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'studio_manager_admin_footer_text');
 		$this->loader->add_filter( 'wp_before_admin_bar_render', $plugin_admin, 'studio_manager_remove_wp_icon_from_admin_bar');
 
+		$this->loader->add_action('admin_menu', $plugin_admin, 'studio_manager_hide_admin_menu_items');
+
 	}
 
 	/**

@@ -230,6 +230,23 @@ class Studio_Manager_Admin {
         $valid['admin_footer_text'] = (isset($input['admin_footer_text']) && !empty($input['admin_footer_text'])) ? wp_kses($input['admin_footer_text'], array('a' => array( 'href' => array(), 'title' => array()))) : '';
         $valid['remove_admin_bar_icon'] = (isset($input['remove_admin_bar_icon']) && !empty($input['remove_admin_bar_icon'])) ? 1 : 0;
 
+        $valid['remove_admin_bar_icon'] = (isset($input['remove_admin_bar_icon']) && !empty($input['remove_admin_bar_icon'])) ? 1 : 0;
+
+		global $menu;
+		$menu_item_arr = array();
+		//error_log(print_r($input, true));
+		if(isset($input['admin_menu_items'])):
+		  foreach($input['admin_menu_items'] as $menu_item_key => $menu_item_val){
+		    //$menu_item_arr[$menu_item_key] = json_decode($input['admin_menu_items_val'][$menu_item_key]);
+
+		    $menu_item_arr[$menu_item_key] = (isset($input['admin_menu_items_val'])) ? unserialize($input['admin_menu_items_val'][$menu_item_key]) : $menu[$menu_item_key];
+		    $menu_item_arr[$menu_item_key]['hidden'] = ($input['admin_menu_items'][$menu_item_key] == 1) ? 1 : 0; 
+		  }
+		$valid['admin_menu_items'] = $menu_item_arr;
+		else:
+		$valid['admin_menu_items'] = array();
+		endif;
+
 		return $valid;
 	}
 
@@ -277,6 +294,20 @@ class Studio_Manager_Admin {
             global $wp_admin_bar;
             $wp_admin_bar->remove_menu('wp-logo');
         }
+    }
+
+
+    public function studio_manager_hide_admin_menu_items(){
+        if(isset($this->studio_manager_options['admin_menu_items'])){
+          foreach($this->studio_manager_options['admin_menu_items'] as $menu_item_key => $menu_item_value){
+            if(isset($this->studio_manager_options['admin_menu_items'][$menu_item_key][2])){
+            	if ( !current_user_can( 'edit_theme_options' ) ) {
+	                remove_menu_page( $this->studio_manager_options['admin_menu_items'][$menu_item_key][2] );
+	            }
+            }
+          }
+        }
+    
     }
 
 
