@@ -233,14 +233,6 @@
 				</fieldset>
 
 
-				<!-- Change WordPress admin footer text -->
-				<fieldset>
-					<legend class="screen-reader-text"><span><?php _e('Change Admin footer text with your own', $this->plugin_name);?></span></legend>
-					<h3 class="section-subheading"><?php esc_attr_e('Change Admin footer text with your own', $this->plugin_name);?></h3>
-					<input type="text" class="regular-text" id="<?php echo $this->plugin_name;?>-admin_footer_text" name="<?php echo $this->plugin_name;?>[admin_footer_text]" value="<?php if(!empty($admin_footer_text)) esc_attr_e($admin_footer_text, $this->plugin_name);?>" placeholder="<?php esc_attr_e('Theme created for your awesome business', $this->plugin_name);?>" />
-				</fieldset>
-
-
 				<!-- Remove wp icon from admin bar -->
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e('Remove WordPress Icon from admin bar', $this->plugin_name);?></span></legend>
@@ -249,6 +241,14 @@
 						<input type="checkbox" id="<?php echo $this->plugin_name;?>-remove_admin_bar_icon" name="<?php echo $this->plugin_name;?>[remove_admin_bar_icon]" value="1" <?php checked($remove_admin_bar_icon, 1);?>/>
 						<span><?php esc_attr_e('Remove WordPress Icon', $this->plugin_name);?></span>
 					</label>
+				</fieldset>
+
+
+				<!-- Change WordPress admin footer text -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Change Admin footer text with your own', $this->plugin_name);?></span></legend>
+					<h3 class="section-subheading"><?php esc_attr_e('Change Admin footer text with your own', $this->plugin_name);?></h3>
+					<input type="text" class="regular-text" id="<?php echo $this->plugin_name;?>-admin_footer_text" name="<?php echo $this->plugin_name;?>[admin_footer_text]" value="<?php if(!empty($admin_footer_text)) esc_attr_e($admin_footer_text, $this->plugin_name);?>" placeholder="<?php esc_attr_e('Theme created for your awesome business', $this->plugin_name);?>" />
 				</fieldset>
 			</div>
 
