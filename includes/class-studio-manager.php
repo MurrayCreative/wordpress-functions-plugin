@@ -151,6 +151,7 @@ class Studio_Manager {
 
 		$plugin_admin = new Studio_Manager_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		// Enqueue CSS and JS for the wp-admin area
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		
@@ -161,13 +162,15 @@ class Studio_Manager {
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 		$this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
 
-		// Save/Update our plugin options
+		// Save / Update our plugin options
 		$this->loader->add_action('admin_init', $plugin_admin, 'options_update');
 
-        //Admin Customizations
+        // Admin Customizations
+        // Set admin custom footer text
 		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'studio_manager_admin_footer_text');
+		// Remove WP icon from admin bar if option is set
 		$this->loader->add_filter( 'wp_before_admin_bar_render', $plugin_admin, 'studio_manager_remove_wp_icon_from_admin_bar');
-
+		// Hide specified admin menu items
 		$this->loader->add_action('admin_menu', $plugin_admin, 'studio_manager_hide_admin_menu_items');
 
 	}
@@ -187,20 +190,27 @@ class Studio_Manager {
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		// Below are our "public" frontend related actions and filters hooks
+
+		// Run the plugin on wp-admin init
+		$this->loader->add_action( 'init', $plugin_public, 'studio_manager' );
 		
 		// Cleanup - Actions and filters
-		//Actions
-		$this->loader->add_action( 'init', $plugin_public, 'studio_manager' );
+		// Actions
+		// Prettify URL of search page
 		$this->loader->add_action( 'template_redirect', $plugin_public, 'studio_manager_prettify_search_redirect' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'studio_manager_cdn_jquery', PHP_INT_MAX );
+		// Remove WP admin bar
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_admin_bar');
+		// Remove version numbers from CSS and JS files
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_cssjs_ver');
 
 		//Filters
+		// Remove pingbacks
 		$this->loader->add_filter( 'wp_headers', $plugin_public, 'studio_manager_remove_x_pingback' );
+		// Add post, page or product slug class to body class
 		$this->loader->add_filter( 'body_class', $plugin_public, 'studio_manager_body_class_slug' );
 
-		//Images
+		// Images
+		// Add custom image sizes
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_add_images_size' );
 
 	}
