@@ -203,7 +203,7 @@
 			</div>
 
 		    
-			<!-- Custom Image Sizes -->
+			<!-- Admin Customisations -->
 			<div class="section-wrapper">
 				<h2 class="section-title"><?php _e('Admin Customisations', $this->plugin_name);?></h2>
 

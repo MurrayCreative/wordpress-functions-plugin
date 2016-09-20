@@ -157,37 +157,59 @@ class Studio_Manager_Admin {
 	* admin/class-wp-cbf-admin.php
 	*
 	**/
+
+
+	/*  ==========================================================================
+		 Validate all options before saving
+		========================================================================== */
 	public function validate($input) {
 		// All checkboxes inputs        
 		$valid = array();
 
-		// Cleanup
+		// Clean-up Options
+		// Remove some meta and generators from the <head>
 		$valid['cleanup'] = (isset($input['cleanup']) && !empty($input['cleanup'])) ? 1 : 0;
+
+		// Add post,page or product slug class to body class
 		$valid['body_class_slug'] = (isset($input['body_class_slug']) && !empty($input['body_class_slug'])) ? 1 : 0;
+
+		// Hide Admin Bar
 		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
-		$valid['hide_admin_bar'] = (isset($input['hide_admin_bar']) && !empty($input['hide_admin_bar'])) ? 1 : 0;
+
+		// Prettify Search URL
 		$valid['prettify_search'] = (isset($input['prettify_search']) && !empty($input['prettify_search'])) ? 1 : 0;
+
+		// Remove css and js query string versions
 		$valid['css_js_versions'] = (isset($input['css_js_versions']) && !empty($input['css_js_versions'])) ? 1 : 0;
 
-
-		// Login Logo
+		// Add client logo to login
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
 
 
-        // New images sizes
+        // Custom Image Sizes
         if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {
+        	// Get all existing custom image sizes
             $existing_images_sizes = $input['existing_images_size'];
+            // Loop through existing custom image sizes
             foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
+            	// Check cropping setting on each image size
                 $existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
             endforeach;
         }else{
+        	// Define the array for already existing image sizes
             $existing_images_sizes = array();
         }
+
+        // Define the new image sizes array
         $new_images_size = array();
 
+        // If there are new image sizes defined
         if(isset( $input['new_images_size']) &&  !empty($input['new_images_size']) ){
+        	// Get image size slug
             $images_size_slug = sanitize_title($input['images_size']['name']);
+            // Get image size name
             $images_size_name = sanitize_text_field($input['images_size']['name']);
+            // Return error if no slug present
             if(empty($images_size_slug)){
                 add_settings_error(
                         'new_images_size_error',                     // Setting title
@@ -196,8 +218,11 @@ class Studio_Manager_Admin {
                         'error'                         // Type of message
                 );
             }else{
+            	// Set new size name
                 $new_images_size[$images_size_slug]['name'] = $images_size_name;
+                // Set new size width
                 $new_images_size[$images_size_slug]['width'] = sanitize_text_field($input['images_size']['width']);
+                // Return error if no width present
                 if(empty($new_images_size[$images_size_slug]['width'])){
                     add_settings_error(
                             'new_images_size_width_error',                     // Setting title
@@ -207,7 +232,9 @@ class Studio_Manager_Admin {
                     );
                 }
 
+                // Set new size height
                 $new_images_size[$images_size_slug]['height'] = sanitize_text_field($input['images_size']['height']);
+                // Return error if no height present
                 if(empty($new_images_size[$images_size_slug]['height'])){
                     add_settings_error(
                             'new_images_size_heigth_error',                     // Setting title
@@ -216,37 +243,49 @@ class Studio_Manager_Admin {
                             'error'                         // Type of message
                     );
                 }
+                // Check if images should be cropped
                 $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
 
             }
         }
+        // If all image size details are present for new image size, add it to the array
         if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height'])){
                 $valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
         }else{
+        	// Validate the existing custom image sizes
             $valid['images_size_arr'] = $existing_images_sizes;
         }
 
-        //Admin Customisations
+        // Admin Customisations
+        // Change WordPress admin footer text
         $valid['admin_footer_text'] = (isset($input['admin_footer_text']) && !empty($input['admin_footer_text'])) ? wp_kses($input['admin_footer_text'], array('a' => array( 'href' => array(), 'title' => array()))) : '';
+
+        // Remove wp icon from admin bar
         $valid['remove_admin_bar_icon'] = (isset($input['remove_admin_bar_icon']) && !empty($input['remove_admin_bar_icon'])) ? 1 : 0;
 
-        $valid['remove_admin_bar_icon'] = (isset($input['remove_admin_bar_icon']) && !empty($input['remove_admin_bar_icon'])) ? 1 : 0;
-
+        // Hide WordPress admin menu items
+        // Use the $menu global variable to access the WordPress admin left-side menus
 		global $menu;
+		// Define the array of menu items
 		$menu_item_arr = array();
-		//error_log(print_r($input, true));
-		if(isset($input['admin_menu_items'])):
-		  foreach($input['admin_menu_items'] as $menu_item_key => $menu_item_val){
-		    //$menu_item_arr[$menu_item_key] = json_decode($input['admin_menu_items_val'][$menu_item_key]);
 
-		    $menu_item_arr[$menu_item_key] = (isset($input['admin_menu_items_val'])) ? unserialize($input['admin_menu_items_val'][$menu_item_key]) : $menu[$menu_item_key];
-		    $menu_item_arr[$menu_item_key]['hidden'] = ($input['admin_menu_items'][$menu_item_key] == 1) ? 1 : 0; 
-		  }
-		$valid['admin_menu_items'] = $menu_item_arr;
+		// If there are menu items present
+		if(isset($input['admin_menu_items'])):
+			// Loop through the menu items
+			foreach($input['admin_menu_items'] as $menu_item_key => $menu_item_val){
+
+				// Set the menu item keys in the menu items array
+				$menu_item_arr[$menu_item_key] = (isset($input['admin_menu_items_val'])) ? unserialize($input['admin_menu_items_val'][$menu_item_key]) : $menu[$menu_item_key];
+				$menu_item_arr[$menu_item_key]['hidden'] = ($input['admin_menu_items'][$menu_item_key] == 1) ? 1 : 0; 
+			}
+			// Add the menu items array to $valid
+			$valid['admin_menu_items'] = $menu_item_arr;
 		else:
-		$valid['admin_menu_items'] = array();
+			// Set $valid as new empty array
+			$valid['admin_menu_items'] = array();
 		endif;
 
+		// Return
 		return $valid;
 	}
 
@@ -255,24 +294,41 @@ class Studio_Manager_Admin {
      *
      * @since    1.0.0
      */
-     private function studio_manager_login_logo_css(){
-         if(isset($this->studio_manager_options['login_logo_id']) && !empty($this->studio_manager_options['login_logo_id'])){
-             $login_logo = wp_get_attachment_image_src($this->studio_manager_options['login_logo_id'], 'thumbnail');
-             $login_logo_url = $login_logo[0];
-             $login_logo_css  = "body.login h1 a {background-image: url(".$login_logo_url."); width:100px; height:100px; background-size: contain;}";
-             return $login_logo_css;
-         }
-     }
+	/*  ==========================================================================
+		 Get new logo for WordPress login page
+		========================================================================== */
+	private function studio_manager_login_logo_css() {
 
-     // Write the actually needed css for login customizations
-     public function studio_manager_login_css(){
-         if( !empty($this->studio_manager_options['login_logo_id']) ){
-             echo '<style>';
-             if( !empty($this->studio_manager_options['login_logo_id'])){
-                   echo $this->studio_manager_login_logo_css();
-             }
-             echo '</style>';
-         }
+		// If the login_logo_id is present and not empty
+		if(isset($this->studio_manager_options['login_logo_id']) && !empty($this->studio_manager_options['login_logo_id'])){
+			// Get the new logo
+			$login_logo = wp_get_attachment_image_src($this->studio_manager_options['login_logo_id'], 'thumbnail');
+			// Get the logo URL
+			$login_logo_url = $login_logo[0];
+			// Set the CSS for the new logo
+			$login_logo_css  = "body.login h1 a {background-image: url(".$login_logo_url."); width:100px; height:100px; background-size: contain;}";
+			// Return the logo CSS
+			return $login_logo_css;
+		}
+
+	}
+
+
+	/*  ==========================================================================
+		 Write the css for login customizations
+		========================================================================== */
+     public function studio_manager_login_css() {
+
+		// If the login_logo_id is present
+		if( !empty($this->studio_manager_options['login_logo_id']) ){
+			// Output the style
+			echo '<style>';
+			if( !empty($this->studio_manager_options['login_logo_id'])){
+				echo $this->studio_manager_login_logo_css();
+			}
+			echo '</style>';
+		}
+
      }
 
     /**
@@ -280,35 +336,58 @@ class Studio_Manager_Admin {
      *
      * @since    1.0.0
      */
+	/*  ==========================================================================
+		 Change the WordPress footer text to custom text
+		========================================================================== */
+	public function studio_manager_admin_footer_text($footer_text) {
+
+		// If there is custom footer text present
+		if(!empty($this->studio_manager_options['admin_footer_text'])){
+			// Get the custom footer text
+			$footer_text = $this->studio_manager_options['admin_footer_text'];
+		}
+		// Return the footer text
+		return $footer_text;
+
+	}
 
 
-    public function studio_manager_admin_footer_text($footer_text){
-        if(!empty($this->studio_manager_options['admin_footer_text'])){
-            $footer_text = $this->studio_manager_options['admin_footer_text'];
-        }
-        return $footer_text;
-    }
+	/*  ==========================================================================
+		 Remove the WordPress icon from the Admin bar
+		========================================================================== */
+	public function studio_manager_remove_wp_icon_from_admin_bar() {
 
-    public function studio_manager_remove_wp_icon_from_admin_bar() {
-        if(!empty($this->studio_manager_options['remove_admin_bar_icon'])){
-            global $wp_admin_bar;
-            $wp_admin_bar->remove_menu('wp-logo');
-        }
-    }
+		// If the option is set to remove the icon
+		if(!empty($this->studio_manager_options['remove_admin_bar_icon'])){
+			// Use the global $wp_admin_bar
+			global $wp_admin_bar;
+			// Remove the icon
+			$wp_admin_bar->remove_menu('wp-logo');
+		}
 
+	}
 
-    public function studio_manager_hide_admin_menu_items(){
-        if(isset($this->studio_manager_options['admin_menu_items'])){
-          foreach($this->studio_manager_options['admin_menu_items'] as $menu_item_key => $menu_item_value){
-            if(isset($this->studio_manager_options['admin_menu_items'][$menu_item_key][2])){
-            	if ( !current_user_can( 'edit_theme_options' ) ) {
-	                remove_menu_page( $this->studio_manager_options['admin_menu_items'][$menu_item_key][2] );
-	            }
-            }
-          }
-        }
-    
-    }
+	/*  ==========================================================================
+		 Hide selected admin menu items
+		========================================================================== */
+	public function studio_manager_hide_admin_menu_items() {
+
+		// If the menu items option is set
+		if(isset($this->studio_manager_options['admin_menu_items'])){
+			// Loop through the menu items in the array
+			foreach($this->studio_manager_options['admin_menu_items'] as $menu_item_key => $menu_item_value){
+				// If the admin_menu_items key is set
+				if(isset($this->studio_manager_options['admin_menu_items'][$menu_item_key][2])){
+					// If the user is not an administrator
+					if ( !current_user_can( 'edit_theme_options' ) ) {
+						// Remove the menu item
+						remove_menu_page( $this->studio_manager_options['admin_menu_items'][$menu_item_key][2] );
+					}
+				}
+			}
+		}
+
+	}
 
 
 }
