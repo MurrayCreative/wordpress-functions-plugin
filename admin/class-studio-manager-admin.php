@@ -170,7 +170,7 @@ class Studio_Manager_Admin {
 		// Remove some meta and generators from the <head>
 		$valid['cleanup'] = (isset($input['cleanup']) && !empty($input['cleanup'])) ? 1 : 0;
 
-		// Add post,page or product slug class to body class
+		// Add post, page or product slug class to body class
 		$valid['body_class_slug'] = (isset($input['body_class_slug']) && !empty($input['body_class_slug'])) ? 1 : 0;
 
 		// Hide Admin Bar

@@ -14,31 +14,50 @@
 ?>
 
 <?php
-	// Grab all options
+/*  ==========================================================================
+	 Variables being used
+	========================================================================== */
+	// Use the global $menu variable for the hide admin menu items
 	global $menu;
 
+	// Get all plugin options
 	$options = get_option($this->plugin_name);
 
-	// Cleanup
+/*  ==========================================================================
+	 Get all options
+	========================================================================== */
+
+	/* Clean-up options ========================================================================== */ 
+	// WP Head Clean-up
 	$cleanup = $options['cleanup'];
+	// Add post, page or product slug class to body class
 	$body_class_slug = $options['body_class_slug'];
+	// Hide admin bar
 	$hide_admin_bar = $options['hide_admin_bar'];
+	// Prttify search URL
 	$prettify_search = $options['prettify_search'];
+	// Remove version numbers from CSS and JS
 	$css_js_versions = $options['css_js_versions'];
 
-	// Login customization vars
+	/* Login customisations ========================================================================== */ 
+	// Custom WP login page logo
 	$login_logo_id = isset($options['login_logo_id']) ? $options['login_logo_id'] : '';
 	$login_logo = wp_get_attachment_image_src( $login_logo_id, 'thumbnail' );
 	$login_logo_url = $login_logo[0];
 
-	// Image Sizes
+	/* Image sizes ========================================================================== */ 
+	// New custom image sizes
 	$new_images_size = $options['new_images_size'];
+	// Existing custom image sizes
 	$images_size_arr = $options['images_size_arr'];
 
-	// Admin Customisations
+	/* Admin area customisations ========================================================================== */ 
+	// Admin custom footer text
 	$admin_footer_text  = $options['admin_footer_text'];
+	// Remove WP icon from admin bar
 	$remove_admin_bar_icon = $options['remove_admin_bar_icon'];
 
+	// Menu items to be hidden
 	$menu_items = (isset($options['admin_menu_items'])) ? wp_parse_args($options['admin_menu_items'], $menu) : $menu ;
 	$all_menu_items = array();
 	foreach($menu_items as $menu_item_key => $menu_item_val){
@@ -184,9 +203,11 @@
 									if($existing_images_size_name != 'post-thumbnail'):?>
 										<fieldset class="existing-images-size">
 											<h4><?php echo $existing_images_size_name;?></h4>
+
 											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_w">Width</label>
 											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][name]" type="hidden" value="<?php echo $existing_images_size_values['name'];?>" >
 											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_w" value="<?php echo $existing_images_size_values['width'];?>" class="small-text" >
+
 											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h">Height</label>
 											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h" value="<?php echo $existing_images_size_values['height'];?>" class="small-text">
 											<br>
@@ -219,14 +240,16 @@
 								$menu_slug = $menu_value[2];
 								$menu_arr = esc_html(serialize($menu_value));
 								//$menu_arr = esc_html(json_encode($menu_value));
-					?>
-					<label for="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>">
-					<input type="checkbox" id="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>" name="<?php echo $this->plugin_name;?>[admin_menu_items][<?php echo $menu_key; ?>]" value="1" <?php checked($menu_value['hidden'], 1);?>/>
-					<input type="hidden" name="<?php echo $this->plugin_name;?>[admin_menu_items_val][<?php echo $menu_key; ?>]" value='<?php echo $menu_arr?>' >
-					<span><?php esc_attr_e("Hide ".$menu_label." menu item", $this->plugin_name);?></span>
-					</label>
-					<br/>
-					<?php
+								?>
+								<label for="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>">
+								<input type="checkbox" id="<?php echo $this->plugin_name;?>-admin_menu_items_<?php echo $menu_slug;?>" name="<?php echo $this->plugin_name;?>[admin_menu_items][<?php echo $menu_key; ?>]" value="1" <?php checked($menu_value['hidden'], 1);?>/>
+
+								<input type="hidden" name="<?php echo $this->plugin_name;?>[admin_menu_items_val][<?php echo $menu_key; ?>]" value='<?php echo $menu_arr?>' >
+								
+								<span><?php esc_attr_e("Hide ".$menu_label." menu item", $this->plugin_name);?></span>
+								</label>
+								<br/>
+								<?php
 							endif;
 						endforeach;
 					?>

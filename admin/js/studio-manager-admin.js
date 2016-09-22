@@ -49,7 +49,9 @@
 
         // wp.media add Image
          imgUploadButton.on( 'click', function( event ){
-            
+
+         	console.log('Logo button clicked');
+
             event.preventDefault();
             
             // If the media frame already exists, reopen it.
@@ -62,7 +64,7 @@
             frame = wp.media({
               title: 'Select or Upload Media for your Login Logo',
               button: {
-                text: 'Use as my Login page Logo'
+                text: 'Use as Login page Logo'
               },
               multiple: false  // Set to true to allow multiple files to be selected
             });
@@ -72,7 +74,7 @@
               // Get media attachment details from the frame state
               var attachment = frame.state().get('selection').first().toJSON();    
 
-              // console.log(attachment);            
+              // console.log(attachment);
 
               // Send the attachment URL to our custom image input field.
               imgPreview.find( 'img' ).attr( 'src', attachment.sizes.thumbnail.url );
