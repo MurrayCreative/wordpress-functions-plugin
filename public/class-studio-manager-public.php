@@ -112,18 +112,18 @@ class Studio_Manager_Public {
         if($this->studio_manager_options['cleanup']){
 
 
-            remove_action( 'wp_head', 'rsd_link' );                 // RSD link
-            remove_action( 'wp_head', 'feed_links_extra', 3 );            // Category feed link
-            remove_action( 'wp_head', 'feed_links', 2 );                // Post and comment feed links
+            remove_action( 'wp_head', 'rsd_link' ); // RSD link
+            remove_action( 'wp_head', 'feed_links_extra', 3 ); // Category feed link
+            remove_action( 'wp_head', 'feed_links', 2 ); // Post and comment feed links
             remove_action( 'wp_head', 'index_rel_link' );
             remove_action( 'wp_head', 'wlwmanifest_link' );
-            remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 );        // Parent rel link
-            remove_action( 'wp_head', 'start_post_rel_link', 10, 0 );       // Start post rel link
+            remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 ); // Parent rel link
+            remove_action( 'wp_head', 'start_post_rel_link', 10, 0 ); // Start post rel link
             remove_action( 'wp_head', 'rel_canonical', 10, 0 );
             remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
             remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 ); // Adjacent post rel link
             remove_action( 'wp_head', 'adjacent_posts_rel_link', 10, 0); // Display relational links for the posts adjacent to the current post.
-            remove_action( 'wp_head', 'wp_generator' );               // WP Version
+            remove_action( 'wp_head', 'wp_generator' ); // WP Version
             remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
             remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
             remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -192,7 +192,7 @@ class Studio_Manager_Public {
 			foreach($this->studio_manager_options['images_size_arr'] as $images_size_name => $images_size):
 				$images_size_w =  $images_size['width'];
 				$images_size_h =  $images_size['height'];
-				$images_size_c =  ($images_size['crop'] == 1) ? true : false;
+				$images_size_c =  ($images_size['crop'] != 0) ? $images_size['crop'] : false;
 				add_image_size( $images_size_name, $images_size_w, $images_size_h, $images_size_c );
 
 			endforeach;

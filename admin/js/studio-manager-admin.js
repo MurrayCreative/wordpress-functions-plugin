@@ -44,7 +44,9 @@
              imgIdInput = $( '#login_logo_id' ),
              imgPreview = $('#upload_logo_preview'),
              imgDelButton = $('#studio-manager-delete_logo_button'),
-             $showChild = $(".show-child-if-checked");
+             $showChild = $(".show-child-if-checked"),
+             $showNewHardCrop = $(".new-images-size-crop"),
+             $showNewHardCropPositions = $(".new-hard-crop-positions");
 
 
         // wp.media add Image
@@ -99,14 +101,26 @@
             imgPreview.addClass('hidden');
         });
 
+
 	 	// Fields showing after parent is checked
 		$showChild.on('change', function() {
-		    if(this.checked) {
-			$(this).parent().next('fieldset').removeClass('hidden');
-		    }else{
-			$(this).parent().next('fieldset').addClass('hidden');
-		    }
+			if(this.checked) {
+				$(this).parent().next('fieldset').removeClass('hidden');
+			}else{
+				$(this).parent().next('fieldset').addClass('hidden');
+			}
 		});
+
+
+	 	// Show / hide the hard crop options for new image sizes
+		$showNewHardCrop.on('change', function() {
+			if(this.checked) {
+				$showNewHardCropPositions.removeClass('hidden');
+			}else{
+				$showNewHardCropPositions.addClass('hidden');
+			}
+		});
+
 
     }); // End of DOM Ready
 

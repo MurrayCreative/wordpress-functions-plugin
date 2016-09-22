@@ -2,8 +2,27 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+ /*  ==========================================================================
+    ==========================================================================
 
-/* General */
+    STUDIO MANAGER
+    1. General
+    2. Image Sizes
+    3. WP Admin Area
+
+    CSS FORMATTING
+    1. Positioning
+    2. Display & Box Model
+    3. Text
+    4. Other
+
+    ==========================================================================
+    ========================================================================== */
+
+
+/*  ==========================================================================
+    1. General
+    ========================================================================== */
 .section-wrapper {
 	margin-bottom: 2em;
 	padding: 2em;
@@ -31,10 +50,11 @@ input[type=url]{
 }
 
 
-/* Images */
-.retina-js, .new-images-size{
-	margin-top:12px;
-	margin-left:20px;
+/*  ==========================================================================
+    2. Image Sizes
+    ========================================================================== */
+.new-hard-crop-positions {
+	margin-top: 1em;
 }
 
 .existing-images-size{
@@ -48,7 +68,10 @@ input[type=url]{
 	margin:12px 0 6px;
 }
 
-/* Admin */
+
+/*  ==========================================================================
+    3. WP Admin Area
+    ========================================================================== */
 p.updated {
     background: #fff;
     border-left: 4px solid #7ad03a;
@@ -56,12 +79,6 @@ p.updated {
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     margin: 5px 0 2px;
     padding: 1px 12px;
-}
-
-.smtp-results-debug pre{
-    background:#fff;
-    padding:2%;
-    white-space: pre-wrap;
 }
 
 .field-container{
@@ -74,11 +91,6 @@ p.updated {
 
 input.short{
     border-color: #e35b5b;
-}
-
-.studio_manager-admin-colors{
-	line-height: 34px;
-	padding: 6px 0;
 }
 
 .studio_manager-upload-preview{

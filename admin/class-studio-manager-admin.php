@@ -186,75 +186,107 @@ class Studio_Manager_Admin {
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
 
 
-        // Custom Image Sizes
-        if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {
-        	// Get all existing custom image sizes
-            $existing_images_sizes = $input['existing_images_size'];
-            // Loop through existing custom image sizes
-            foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
-            	// Check cropping setting on each image size
-                $existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
-            endforeach;
-        }else{
-        	// Define the array for already existing image sizes
-            $existing_images_sizes = array();
-        }
+		// Custom Image Sizes
+		if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {
+			// Get all existing custom image sizes
+			$existing_images_sizes = $input['existing_images_size'];
+			// Loop through existing custom image sizes
+			foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
+				// Check cropping setting on each image size
+				$existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
+			endforeach;
+		}else{
+			// Define the array for already existing image sizes
+			$existing_images_sizes = array();
+		}
 
-        // Define the new image sizes array
-        $new_images_size = array();
+		// Define the new image sizes array
+		$new_images_size = array();
 
-        // If there are new image sizes defined
-        if(isset( $input['new_images_size']) &&  !empty($input['new_images_size']) ){
-        	// Get image size slug
-            $images_size_slug = sanitize_title($input['images_size']['name']);
-            // Get image size name
-            $images_size_name = sanitize_text_field($input['images_size']['name']);
-            // Return error if no slug present
-            if(empty($images_size_slug)){
-                add_settings_error(
-                        'new_images_size_error',                     // Setting title
-                        'new_images_size_error_texterror',            // Error ID
-                        __('Please enter a new images size name', $this->plugin_name),    // Error message
-                        'error'                         // Type of message
-                );
-            }else{
-            	// Set new size name
-                $new_images_size[$images_size_slug]['name'] = $images_size_name;
-                // Set new size width
-                $new_images_size[$images_size_slug]['width'] = sanitize_text_field($input['images_size']['width']);
-                // Return error if no width present
-                if(empty($new_images_size[$images_size_slug]['width'])){
-                    add_settings_error(
-                            'new_images_size_width_error',                     // Setting title
-                            'new_images_size_width_error_texterror',            // Error ID
-                            __('Please enter a width to '.$images_size_name.' images size', $this->plugin_name),    // Error message
-                            'error'                         // Type of message
-                    );
-                }
+		// If there are new image sizes defined
+		if(isset( $input['new_images_size']) &&  !empty($input['new_images_size']) ){
+			// Get image size slug
+			$images_size_slug = sanitize_title($input['images_size']['name']);
+			// Get image size name
+			$images_size_name = sanitize_text_field($input['images_size']['name']);
+			// Return error if no slug present
+			if(empty($images_size_slug)){
+				add_settings_error(
+					'new_images_size_error',                     // Setting title
+					'new_images_size_error_texterror',            // Error ID
+					__('Please enter a new image size name', $this->plugin_name),    // Error message
+					'error'                         // Type of message
+				);
+			}else{
+				// Set new size name
+				$new_images_size[$images_size_slug]['name'] = $images_size_name;
+				// Set new size width
+				$new_images_size[$images_size_slug]['width'] = sanitize_text_field($input['images_size']['width']);
+				// Return error if no width present
+				if(empty($new_images_size[$images_size_slug]['width'])){
+					add_settings_error(
+						'new_images_size_width_error',                     // Setting title
+						'new_images_size_width_error_texterror',            // Error ID
+						__('Please enter a width to '.$images_size_name.' image size', $this->plugin_name),    // Error message
+						'error'                         // Type of message
+					);
+				}
 
-                // Set new size height
-                $new_images_size[$images_size_slug]['height'] = sanitize_text_field($input['images_size']['height']);
-                // Return error if no height present
-                if(empty($new_images_size[$images_size_slug]['height'])){
-                    add_settings_error(
-                            'new_images_size_heigth_error',                     // Setting title
-                            'new_images_size_heigth_error_texterror',            // Error ID
-                            __('Please enter a height to '.$images_size_name.' images sizes', $this->plugin_name),     // Error message
-                            'error'                         // Type of message
-                    );
-                }
-                // Check if images should be cropped
-                $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
+				// Set new size height
+				$new_images_size[$images_size_slug]['height'] = sanitize_text_field($input['images_size']['height']);
+				// Return error if no height present
+				if(empty($new_images_size[$images_size_slug]['height'])){
+					add_settings_error(
+						'new_images_size_heigth_error',                     // Setting title
+						'new_images_size_heigth_error_texterror',            // Error ID
+						__('Please enter a height to '.$images_size_name.' image sizes', $this->plugin_name),     // Error message
+						'error'                         // Type of message
+					);
+				}
 
-            }
-        }
-        // If all image size details are present for new image size, add it to the array
-        if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height'])){
-                $valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
-        }else{
-        	// Validate the existing custom image sizes
-            $valid['images_size_arr'] = $existing_images_sizes;
-        }
+				// Check if images should be cropped
+				// $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
+				if((isset($input['images_size']['crop'])) == 1){
+					if(!isset($input['images_size']['crop_horizontal'])){
+						add_settings_error(
+							'new_images_size_crop_horizontal_error', // Setting title
+							'new_images_size_crop_horizontal_error_texterror', // Error ID
+							__('Please choose a horizontal crop option for '.$images_size_name.' image sizes', $this->plugin_name),     // Error message
+							'error' // Type of message
+						);
+					}
+					if(!isset($input['images_size']['crop_vertical'])){
+						add_settings_error(
+							'new_images_size_crop_vertical_error', // Setting title
+							'new_images_size_crop_vertical_error_texterror', // Error ID
+							__('Please choose a vertical crop option for '.$images_size_name.' image sizes', $this->plugin_name),     // Error message
+							'error' // Type of message
+						);
+					}
+					if(isset($input['images_size']['crop_horizontal']) && isset($input['images_size']['crop_vertical'])){
+						$new_images_size[$images_size_slug]['crop'] = array($input['images_size']['crop_horizontal'], $input['images_size']['crop_vertical']);
+					}
+				}
+
+			}
+		}
+		// If all image size details are present for new image size, add it to the array
+		if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height'])){
+
+			// if($new_images_size[$images_size_slug]['crop'] == 0){
+			// 	$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
+			// } else if($new_images_size[$images_size_slug]['crop'] == 1){
+			// 	if(isset($input['images_size']['crop_horizontal']) && isset($input['images_size']['crop_vertical'])){
+			// 		$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
+			// 	}
+			// }
+
+			$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
+
+		}else{
+			// Validate the existing custom image sizes
+			$valid['images_size_arr'] = $existing_images_sizes;
+		}
 
         // Admin Customisations
         // Change WordPress admin footer text
