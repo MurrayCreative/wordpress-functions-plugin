@@ -246,8 +246,10 @@ class Studio_Manager_Admin {
 
 				// Check if images should be cropped
 				// $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
-				if((isset($input['images_size']['crop'])) == 1){
-					if(!isset($input['images_size']['crop_horizontal'])){
+				if(!isset($input['images_size']['crop'])){
+					$new_images_size[$images_size_slug]['crop'] = 2;
+				} else if(isset($input['images_size']['crop'])){
+					if(empty($input['images_size']['crop_horizontal'])){
 						add_settings_error(
 							'new_images_size_crop_horizontal_error', // Setting title
 							'new_images_size_crop_horizontal_error_texterror', // Error ID
@@ -255,7 +257,7 @@ class Studio_Manager_Admin {
 							'error' // Type of message
 						);
 					}
-					if(!isset($input['images_size']['crop_vertical'])){
+					if(empty($input['images_size']['crop_vertical'])){
 						add_settings_error(
 							'new_images_size_crop_vertical_error', // Setting title
 							'new_images_size_crop_vertical_error_texterror', // Error ID
@@ -271,7 +273,7 @@ class Studio_Manager_Admin {
 			}
 		}
 		// If all image size details are present for new image size, add it to the array
-		if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height'])){
+		if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height']) && !empty($new_images_size[$images_size_slug]['crop'])){
 
 			// if($new_images_size[$images_size_slug]['crop'] == 0){
 			// 	$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);

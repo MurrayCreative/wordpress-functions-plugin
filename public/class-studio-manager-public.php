@@ -192,7 +192,7 @@ class Studio_Manager_Public {
 			foreach($this->studio_manager_options['images_size_arr'] as $images_size_name => $images_size):
 				$images_size_w =  $images_size['width'];
 				$images_size_h =  $images_size['height'];
-				$images_size_c =  ($images_size['crop'] != 0) ? $images_size['crop'] : false;
+				$images_size_c =  ($images_size['crop'] != 2) ? $images_size['crop'] : 0;
 				add_image_size( $images_size_name, $images_size_w, $images_size_h, $images_size_c );
 
 			endforeach;
