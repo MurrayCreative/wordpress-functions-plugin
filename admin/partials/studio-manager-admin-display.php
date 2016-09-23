@@ -265,10 +265,69 @@
 
 											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h">Height</label>
 											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_h" value="<?php echo $existing_images_size_values['height'];?>" class="small-text">
-											<br>
+											<!-- <br>
 											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop">
-											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop" <?php checked($existing_images_size_values['crop'], 1);?> >
-											<span><?php esc_attr_e('Hard-Crop images',  $this->plugin_name);?></span>
+											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop" <?php checked($existing_images_size_values['crop'], 2);?> >
+											<span><?php esc_attr_e('Hard-Crop images',  $this->plugin_name);?></span> -->
+						
+											<br>
+
+											<label for="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop">
+												<span><?php esc_attr_e('Hard-Crop images',  $this->plugin_name);?></span>
+											</label>
+											<input name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop]" type="checkbox" id="<?php echo $this->plugin_name;?>-<?php echo $existing_images_size_name;?>_crop"  class="existing-images-size-crop" <?php checked($existing_images_size_values['crop'], 2);?>>
+
+											<br>
+
+											<!-- Cropping Options -->
+											<div class="existing-hard-crop-positions hidden">
+												<span>Horizontal</span>
+												<br>
+												<fieldset>
+													<legend class="screen-reader-text"><span>input type="radio"</span></legend>
+													<label title='g:i a'>
+													<input type="radio" name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop_horizontal]" value="left" id="<?php echo $this->plugin_name;?>-new_images_size_crop_left" />
+													<span><?php esc_attr_e('Left',  $this->plugin_name);?></span>
+													</label>
+													<br>
+
+													<label title='g:i a'>
+													<input type="radio" name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop_horizontal]" value="center" id="<?php echo $this->plugin_name;?>-new_images_size_crop_hcenter" />
+													<span><?php esc_attr_e('Center',  $this->plugin_name);?></span>
+													</label>
+													<br>
+
+													<label title='g:i a'>
+													<input type="radio" name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop_horizontal]" value="right" id="<?php echo $this->plugin_name;?>-new_images_size_crop_right" />
+													<span><?php esc_attr_e('Right',  $this->plugin_name);?></span>
+													</label>
+												</fieldset>
+												
+												<br>
+												<span>Vertical</span>
+												<br>
+												<fieldset>
+													<legend class="screen-reader-text"><span>input type="radio"</span></legend>
+													<label title='g:i a'>
+													<input type="radio" name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop_vertical]" value="top" id="<?php echo $this->plugin_name;?>-new_images_size_crop_top" />
+													<span><?php esc_attr_e('Top',  $this->plugin_name);?></span>
+													</label>
+													<br>
+
+													<label title='g:i a'>
+													<input type="radio" name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop_vertical]" value="center" id="<?php echo $this->plugin_name;?>-new_images_size_crop_vcenter" />
+													<span><?php esc_attr_e('Center',  $this->plugin_name);?></span>
+													</label>
+													<br>
+
+													<label title='g:i a'>
+													<input type="radio" name="<?php echo $this->plugin_name;?>[existing_images_size][<?php echo $existing_images_size_name;?>][crop_vertical]" value="bottom" id="<?php echo $this->plugin_name;?>-new_images_size_crop_bottom" />
+													<span><?php esc_attr_e('Bottom',  $this->plugin_name);?></span>
+													</label>
+												</fieldset>
+											</div>
+											<!-- End of Cropping Options -->
+
 											</label>
 										</fieldset>
 									<?php endif;?>
