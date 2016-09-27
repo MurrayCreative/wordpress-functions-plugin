@@ -142,11 +142,12 @@ input.short{
 	height: 40px;
 	top: 0px;
 	left: 0px;
-	background: url('../../images/close-button.png');
+	/*background: url('../../images/close-button.png');*/
+	background-color: black;
 	border-radius: 20px;
 	border: none;
 	color: white;
-	font-size: 0px;
+	font-size: 25px;
 	content: '';
 }
 
@@ -156,11 +157,12 @@ input.short{
 	height: 40px;
 	top: 0px;
 	left: 0px;
-	background: url('../../images/close-button-hover.png');
+	/*background: url('../../images/close-button-hover.png');*/
+	background-color: #333333;
 	border-radius: 20px;
 	border: none;
 	color: white;
-	font-size: 0px;
+	font-size: 25px;
 	content: '';
 	cursor: pointer;
 }
