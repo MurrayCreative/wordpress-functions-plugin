@@ -9,6 +9,7 @@
     1. General
     2. Image Sizes
     3. WP Admin Area
+    4. WordPress Login
 
     CSS FORMATTING
     1. Positioning
@@ -124,4 +125,43 @@ input.short{
  .studio_manager-admin-menu-items h4{
     margin-bottom:6px;
   }
+
+
+/*  ==========================================================================
+    4. WordPress Login
+    ========================================================================== */
+.studio-manager-upload-preview {
+	position: relative;
+	margin-top: 20px;
+	padding: 20px;
+}
+
+.studio-manager-delete-image {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: 0px;
+	left: 0px;
+	background: url('../../images/close-button.png');
+	border-radius: 20px;
+	border: none;
+	color: white;
+	font-size: 0px;
+	content: '';
+}
+
+.studio-manager-delete-image:hover {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: 0px;
+	left: 0px;
+	background: url('../../images/close-button-hover.png');
+	border-radius: 20px;
+	border: none;
+	color: white;
+	font-size: 0px;
+	content: '';
+	cursor: pointer;
+}
 

@@ -96,7 +96,9 @@ class Studio_Manager_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+        if ( 'settings_page_studio-manager' == get_current_screen() -> id ) {
+            wp_enqueue_media();
+        }
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/studio-manager-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
@@ -185,6 +187,9 @@ class Studio_Manager_Admin {
 		// Add client logo to login
 		$valid['login_logo_id'] = (isset($input['login_logo_id']) && !empty($input['login_logo_id'])) ? absint($input['login_logo_id']) : 0;
 
+		// Link login page logo to homepage instead of WordPress.org
+		$valid['login_logo_link'] = (isset($input['login_logo_link']) && !empty($input['login_logo_link'])) ? 1 : 0;
+
 
 		// Custom Image Sizes
 		if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {
@@ -192,8 +197,6 @@ class Studio_Manager_Admin {
 			$existing_images_sizes = $input['existing_images_size'];
 			// Loop through existing custom image sizes
 			foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
-				// Check cropping setting on each image size
-				// $existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
 
 				// Check if images should be cropped
 				if(!isset($existing_images_sizes[$existing_images_size_name]['crop'])){
@@ -274,7 +277,6 @@ class Studio_Manager_Admin {
 				}
 
 				// Check if images should be cropped
-				// $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
 				if(!isset($input['images_size']['crop'])){
 					$new_images_size[$images_size_slug]['crop'] = 0;
 				} else if(isset($input['images_size']['crop'])){
@@ -303,14 +305,6 @@ class Studio_Manager_Admin {
 		}
 		// If all image size details are present for new image size, add it to the array
 		if(!empty($images_size_slug) && !empty($new_images_size[$images_size_slug]['width']) && !empty($new_images_size[$images_size_slug]['height']) && !empty($new_images_size[$images_size_slug]['crop'])){
-
-			// if($new_images_size[$images_size_slug]['crop'] == 0){
-			// 	$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
-			// } else if($new_images_size[$images_size_slug]['crop'] == 1){
-			// 	if(isset($input['images_size']['crop_horizontal']) && isset($input['images_size']['crop_vertical'])){
-			// 		$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
-			// 	}
-			// }
 
 			$valid['images_size_arr'] = array_merge($existing_images_sizes, $new_images_size);
 
@@ -376,23 +370,63 @@ class Studio_Manager_Admin {
 
 	}
 
+	// Change login logo link to homepage
+	public function wp_cbf_login_logo_link(){
+		if(!empty($this->wp_cbf_options['login_logo_link'])){
+			return home_url();
+		}
+	}
+	// Change login logo title attribute your site title, instead of 'WordPress'.
+	public function wp_cbf_login_logo_headertitle(){
+		if(!empty($this->wp_cbf_options['login_logo_link'])){
+			return get_bloginfo( 'name' );
+		}
+	}
+
 
 	/*  ==========================================================================
 		 Write the css for login customizations
 		========================================================================== */
-     public function studio_manager_login_css() {
+	public function studio_manager_login_css() {
 
 		// If the login_logo_id is present
 		if( !empty($this->studio_manager_options['login_logo_id']) ){
 			// Output the style
 			echo '<style>';
 			if( !empty($this->studio_manager_options['login_logo_id'])){
-				echo $this->studio_manager_login_logo_css();
+				echo $this->studio_manager_login_css();
 			}
 			echo '</style>';
 		}
 
-     }
+	}
+
+
+	// Write the css required for admin customizations
+	public function studio_manager_admin_css(){
+		if( !empty($this->studio_manager_options['login_logo_id']) ){
+			echo '<style>';
+			if( !empty($this->studio_manager_options['login_logo_id'])){
+				echo $this->studio_manager_login_logo_css();
+			}
+			echo '</style>';
+		}
+	}
+
+	// Change login logo link to homepage
+	public function studio_manager_login_logo_link(){
+		if(!empty($this->studio_manager_options['login_logo_link'])){
+			return home_url();
+		}
+	}
+
+	// Change login logo title attribute your site title, instead of 'WordPress'.
+	public function studio_manager_login_logo_headertitle(){
+		if(!empty($this->studio_manager_options['login_logo_link'])){
+			return get_bloginfo( 'name' );
+		}
+	}
+
 
     /**
      * Admin customizations Functions

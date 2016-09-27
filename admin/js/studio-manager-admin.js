@@ -6,38 +6,9 @@
 (function( $ ) {
     'use strict';
 
-    /**
-     * All of the code for your admin-specific JavaScript source
-     * should reside in this file.
-     *
-     * Note that this assume you're going to use jQuery, so it prepares
-     * the $ function reference to be used within the scope of this
-     * function.
-     *
-     * From here, you're able to define handlers for when the DOM is
-     * ready:
-     *
-     * $(function() {
-     *
-     * });
-     *
-     * Or when the window is loaded:
-     *
-     * $( window ).load(function() {
-     *
-     * });
-     *
-     * ...and so on.
-     *
-     * Remember that ideally, we should not attach any more than a single DOM-ready or window-load handler
-     * for any particular page. Though other scripts in WordPress core, other plugins, and other themes may
-     * be doing this, we should try to minimize doing that in our own work.
-     */
-
-
     $(function(){
 
-         // Let's set up some variables for the image upload and removing the image     
+         // Let's set up some variables for the image upload and removing the image
          var frame,
              imgUploadButton = $( '#upload_login_logo_button' ),
              imgContainer = $( '#upload_logo_preview' ),
@@ -104,7 +75,7 @@
         });
 
 
-	 	// Fields showing after parent is checked
+		// Fields showing after parent is checked
 		$showChild.on('change', function() {
 			if($(this).is(':checked')) {
 				$(this).parent().next('fieldset').removeClass('hidden');
@@ -114,7 +85,7 @@
 		});
 
 
-	 	// Show / hide the hard crop options for new image sizes
+		// Show / hide the hard crop options for new image sizes
 		$showNewHardCrop.on('change', function() {
 			// console.log( $(this).parent().find('.new-hard-crop-positions') );
 			if($(this).is(':checked')) {
@@ -125,7 +96,7 @@
 		});
 
 
-	 	// Show / hide the hard crop options for existing image sizes
+		// Show / hide the hard crop options for existing image sizes
 		$showExistingHardCrop.on('change', function() {
 			if($(this).is(':checked')) {
 				$(this).parent().find('.existing-hard-crop-positions').removeClass('hidden');

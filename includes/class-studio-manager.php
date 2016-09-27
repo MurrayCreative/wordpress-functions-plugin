@@ -172,6 +172,12 @@ class Studio_Manager {
 		$this->loader->add_filter( 'wp_before_admin_bar_render', $plugin_admin, 'studio_manager_remove_wp_icon_from_admin_bar');
 		// Hide specified admin menu items
 		$this->loader->add_action('admin_menu', $plugin_admin, 'studio_manager_hide_admin_menu_items');
+		// Load the admin CSS
+		$this->loader->add_action( 'login_enqueue_scripts', $plugin_admin, 'studio_manager_admin_css' );
+		// Link the logo on the login page to the homepage
+		$this->loader->add_action( 'login_headerurl', $plugin_admin, 'studio_manager_login_logo_link' );
+		// Change the title on the login page logo to Blog Title
+		$this->loader->add_action( 'login_headertitle', $plugin_admin, 'studio_manager_login_logo_headertitle' );
 
 	}
 

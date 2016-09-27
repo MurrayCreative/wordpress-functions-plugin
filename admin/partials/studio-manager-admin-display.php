@@ -44,6 +44,8 @@
 	$login_logo_id = isset($options['login_logo_id']) ? $options['login_logo_id'] : '';
 	$login_logo = wp_get_attachment_image_src( $login_logo_id, 'thumbnail' );
 	$login_logo_url = $login_logo[0];
+	// Link login logo to homepage
+	$login_logo_link = $options['login_logo_link'];
 
 	/* Image sizes ========================================================================== */ 
 	// New custom image sizes
@@ -155,8 +157,17 @@
 					</label>
 					<div id="upload_logo_preview" class="studio-manager-upload-preview <?php if(empty($login_logo_id)) echo 'hidden'?>">
 						<img src="<?php echo $login_logo_url; ?>" />
-						<button id="studio-manager-delete_logo_button" class="studio-manager-delete-image">X</button>
+						<button id="studio-manager-delete_logo_button" class="studio-manager-delete-image" title="Remove Logo">X</button>
 					</div>
+				</fieldset>
+
+				<!-- login logo link to homepage instead of wordpress.org -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Link Login Logo to homepage instead of WordPress.org', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-login_logo_link">
+						<input type="checkbox" id="<?php echo $this->plugin_name;?>-login_logo_link" name="<?php echo $this->plugin_name;?>[login_logo_link]" value="1" <?php checked($login_logo_link, 1);?>/>
+						<span><?php esc_attr_e('Link Login Logo to homepage instead of WordPress.org', $this->plugin_name);?></span>
+					</label>
 				</fieldset>
 
 				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
