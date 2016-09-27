@@ -442,10 +442,10 @@ class Studio_Manager_Admin {
 				// If the admin_menu_items key is set
 				if(isset($this->studio_manager_options['admin_menu_items'][$menu_item_key][2])){
 					// If the user is not an administrator
-					if ( !current_user_can( 'edit_theme_options' ) ) {
+					// if ( !current_user_can( 'edit_theme_options' ) ) {
 						// Remove the menu item
 						remove_menu_page( $this->studio_manager_options['admin_menu_items'][$menu_item_key][2] );
-					}
+					// }
 				}
 			}
 		}

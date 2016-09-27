@@ -60,12 +60,12 @@
 	// Menu items to be hidden
 	$menu_items = (isset($options['admin_menu_items'])) ? wp_parse_args($options['admin_menu_items'], $menu) : $menu ;
 	$all_menu_items = array();
-	foreach($menu_items as $menu_item_key => $menu_item_val){
-		if(isset($menu_item_val[0])){
-			$all_menu_items[$menu_item_key] = $menu_item_val;
-			$all_menu_items[$menu_item_key]['hidden'] = (isset($menu_items[$menu_item_key]['hidden'])) ? 1 : 0;
-		}
-	}
+	// foreach($menu_items as $menu_item_key => $menu_item_val){
+	// 	if(isset($menu_item_val[0])){
+	// 		$all_menu_items[$menu_item_key] = $menu_item_val;
+	// 		$all_menu_items[$menu_item_key]['hidden'] = (isset($menu_items[$menu_item_key]['hidden'])) ? 1 : 0;
+	// 	}
+	// }
 
 ?>
 
@@ -135,6 +135,8 @@
 						<span><?php esc_attr_e('Remove CSS and JS versions (uncheck for dev)', $this->plugin_name);?></span>
 					</label>
 				</fieldset>
+
+				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 			</div>
 
 
@@ -156,6 +158,8 @@
 						<button id="studio-manager-delete_logo_button" class="studio-manager-delete-image">X</button>
 					</div>
 				</fieldset>
+
+				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 	        </div>
 
 		    
@@ -331,6 +335,8 @@
 							<?php endif;?>
 					</fieldset>
 				</fieldset>
+
+				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 			</div>
 
 		    
@@ -343,6 +349,13 @@
 					<legend class="screen-reader-text"><span><?php _e('Hide Admin menu items for editors', $this->plugin_name);?></span></legend>
 					<h3 class="section-subheading"><?php esc_attr_e('Hide Admin menu items for editors', $this->plugin_name);?></h3>
 					<?php
+						foreach($menu_items as $menu_item_key => $menu_item_val){
+							if(isset($menu_item_val[0])){
+								$all_menu_items[$menu_item_key] = $menu_item_val;
+								$all_menu_items[$menu_item_key]['hidden'] = (isset($menu_items[$menu_item_key]['hidden'])) ? 1 : 0;
+							}
+						}
+						
 						foreach($all_menu_items as $menu_key => $menu_value):
 							if($menu_value[0]):
 								$re = "/(<span.*<\\/span>)/mi"; 
@@ -383,6 +396,8 @@
 					<h3 class="section-subheading"><?php esc_attr_e('Change Admin footer text with your own', $this->plugin_name);?></h3>
 					<input type="text" class="regular-text" id="<?php echo $this->plugin_name;?>-admin_footer_text" name="<?php echo $this->plugin_name;?>[admin_footer_text]" value="<?php if(!empty($admin_footer_text)) esc_attr_e($admin_footer_text, $this->plugin_name);?>" placeholder="<?php esc_attr_e('Theme created for your awesome business', $this->plugin_name);?>" />
 				</fieldset>
+
+				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 			</div>
 
 
