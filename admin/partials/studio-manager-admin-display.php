@@ -149,6 +149,7 @@
 				<!-- Add client logo to login -->
 				<fieldset>
 					<h3 class="section-subheading"><?php _e('Add logo to login form', $this->plugin_name);?></h3>
+					<p>Minimum dimensions 250 x 250 (width x height)</p>
 					<legend class="screen-reader-text"><span><?php esc_attr_e('Login Logo', $this->plugin_name);?></span></legend>
 					<label for="<?php echo $this->plugin_name;?>-login_logo">
 					<input type="hidden" id="login_logo_id" name="<?php echo $this->plugin_name;?>[login_logo_id]" value="<?php echo $login_logo_id; ?>" />

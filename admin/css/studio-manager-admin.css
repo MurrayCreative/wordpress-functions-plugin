@@ -138,8 +138,8 @@ input.short{
 
 .studio-manager-delete-image {
 	position: absolute;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	top: 0px;
 	left: 0px;
 	/*background: url('../../images/close-button.png');*/
@@ -147,14 +147,14 @@ input.short{
 	border-radius: 20px;
 	border: none;
 	color: white;
-	font-size: 25px;
+	font-size: 20px;
 	content: '';
 }
 
 .studio-manager-delete-image:hover {
 	position: absolute;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	top: 0px;
 	left: 0px;
 	/*background: url('../../images/close-button-hover.png');*/
@@ -162,7 +162,7 @@ input.short{
 	border-radius: 20px;
 	border: none;
 	color: white;
-	font-size: 25px;
+	font-size: 20px;
 	content: '';
 	cursor: pointer;
 }
