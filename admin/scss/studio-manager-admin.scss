@@ -1,0 +1,156 @@
+ /*  ==========================================================================
+    ==========================================================================
+
+    STUDIO MANAGER
+    1. General
+    2. Image Sizes
+    3. WP Admin Area
+    4. WordPress Login
+
+    CSS FORMATTING
+    1. Positioning
+    2. Display & Box Model
+    3. Text
+    4. Other
+
+    ==========================================================================
+    ========================================================================== */
+
+
+/*  ==========================================================================
+    1. General
+    ========================================================================== */
+.section-wrapper {
+	margin-bottom: 2em;
+	padding: 2em;
+	border: solid 1px #b4b9be;
+}
+
+.section-title {
+	margin-top: 1em;
+}
+
+.section-subheading {
+	margin-top: 20px;
+	font-size: 1.1em;
+}
+
+.action-subheading {
+	font-size: 1em;
+}
+
+.studio_manager-metaboxes fieldset{
+	min-height:32px;
+}
+input[type=url]{
+    margin: 0 0 12px;
+}
+
+
+/*  ==========================================================================
+    2. Image Sizes
+    ========================================================================== */
+.new-hard-crop-positions, .existing-hard-crop-positions {
+	margin-top: 1em;
+}
+
+.existing-images-size{
+	margin:0 0 12px 24px;
+}
+.existing-images-size h4{
+	float:left;
+	margin-right:32px;
+}
+.existing-images-size input[type="number"]{
+	margin:12px 0 6px;
+}
+
+
+/*  ==========================================================================
+    3. WP Admin Area
+    ========================================================================== */
+p.updated {
+    background: #fff;
+    border-left: 4px solid #7ad03a;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    margin: 5px 0 2px;
+    padding: 1px 12px;
+}
+
+.field-container{
+    margin-bottom:24px;
+}
+.field-container label{
+    display:block;
+    font-weight:700;
+}
+
+input.short{
+    border-color: #e35b5b;
+}
+
+.studio_manager-upload-preview{
+	min-height:100px;
+	position:relative;
+
+	img {
+		max-width:150px;
+		height:auto;
+	}
+}
+.studio_manager-delete-image{
+	position: absolute;
+	top: 0;
+	width: 24px;
+	height: 24px;
+	background: #222;
+    color:#fff;
+	text-align: center;
+    border: 2px solid #fff;
+	border-radius: 50%;
+	line-height: 10px;
+    padding:0;
+	cursor: pointer;
+    box-shadow: 0 0 2px -1px #222;
+}
+
+ .studio_manager-admin-menu-items{
+    margin-bottom:32px;
+    line-height:24px;
+
+    h4 {
+    	margin-bottom:6px;
+    }
+  }
+
+
+/*  ==========================================================================
+    4. WordPress Login
+    ========================================================================== */
+.studio-manager-upload-preview {
+	position: relative;
+	margin-top: 20px;
+	padding: 20px;
+}
+
+.studio-manager-delete-image {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: 0px;
+	left: 0px;
+	/*background: url('../../images/close-button.png');*/
+	background-color: black;
+	border-radius: 20px;
+	border: none;
+	color: white;
+	font-size: 20px;
+	content: '';
+
+	&:hover {
+		background-color: #333333;
+		cursor: pointer;
+	}
+}
+
