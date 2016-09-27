@@ -190,9 +190,13 @@ class Studio_Manager_Public {
 	public function studio_manager_add_images_size(){
 		if(is_array($this->studio_manager_options['images_size_arr'])):
 			foreach($this->studio_manager_options['images_size_arr'] as $images_size_name => $images_size):
+				// Pass in the width value
 				$images_size_w =  $images_size['width'];
+				// Pass in the height value
 				$images_size_h =  $images_size['height'];
-				$images_size_c =  ($images_size['crop'] != 2) ? $images_size['crop'] : 0;
+				// If the crop value is not 0 or empty, set the crop values that were passed
+				$images_size_c =  ($images_size['crop'] != 0) ? $images_size['crop'] : 0;
+				// Add the image size with all values using the WordPress add_image_size function
 				add_image_size( $images_size_name, $images_size_w, $images_size_h, $images_size_c );
 
 			endforeach;

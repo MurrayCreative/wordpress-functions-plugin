@@ -106,7 +106,7 @@
 
 	 	// Fields showing after parent is checked
 		$showChild.on('change', function() {
-			if(this.checked) {
+			if($(this).is(':checked')) {
 				$(this).parent().next('fieldset').removeClass('hidden');
 			}else{
 				$(this).parent().next('fieldset').addClass('hidden');

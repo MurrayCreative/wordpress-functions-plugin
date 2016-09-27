@@ -193,7 +193,36 @@ class Studio_Manager_Admin {
 			// Loop through existing custom image sizes
 			foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
 				// Check cropping setting on each image size
-				$existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
+				// $existing_images_sizes[$existing_images_size_name]['crop'] = (isset($existing_images_size_value['crop'])) ? 1 : 0;
+
+				// Check if images should be cropped
+				if(!isset($existing_images_sizes[$existing_images_size_name]['crop'])){
+					$existing_images_sizes[$existing_images_size_name]['crop'] = 0;
+				} else if(isset($existing_images_sizes[$existing_images_size_name]['crop'])){
+					// Check that the horizontal crop value is not empty, if it is send an error
+					if(empty($existing_images_sizes[$existing_images_size_name]['crop'][0])){
+						add_settings_error(
+							'new_images_size_crop_horizontal_error', // Setting title
+							'new_images_size_crop_horizontal_error_texterror', // Error ID
+							__('Please choose a horizontal crop option for '.$existing_images_size_name.' image sizes', $this->plugin_name),     // Error message
+							'error' // Type of message
+						);
+					}
+					// Check that the vertical crop value is not empty, if it is send an error
+					if(empty($existing_images_sizes[$existing_images_size_name]['crop'][1])){
+						add_settings_error(
+							'new_images_size_crop_vertical_error', // Setting title
+							'new_images_size_crop_vertical_error_texterror', // Error ID
+							__('Please choose a vertical crop option for '.$existing_images_size_name.' image sizes', $this->plugin_name),     // Error message
+							'error' // Type of message
+						);
+					}
+					// If both the horizontal and vertical values are set, pass them to the crop array
+					if(isset($existing_images_sizes[$existing_images_size_name]['crop'][0]) && isset($existing_images_sizes[$existing_images_size_name]['crop'][1])){
+						$existing_images_sizes[$existing_images_size_name]['crop'] = array($existing_images_sizes[$existing_images_size_name]['crop_horizontal'], $existing_images_sizes[$existing_images_size_name]['crop_vertical']);
+					}
+				}
+
 			endforeach;
 		}else{
 			// Define the array for already existing image sizes
@@ -247,7 +276,7 @@ class Studio_Manager_Admin {
 				// Check if images should be cropped
 				// $new_images_size[$images_size_slug]['crop'] = (isset($input['images_size']['crop'])) ? 1 : 0;
 				if(!isset($input['images_size']['crop'])){
-					$new_images_size[$images_size_slug]['crop'] = 2;
+					$new_images_size[$images_size_slug]['crop'] = 0;
 				} else if(isset($input['images_size']['crop'])){
 					if(empty($input['images_size']['crop_horizontal'])){
 						add_settings_error(
