@@ -209,17 +209,23 @@ class Studio_Manager {
 		// Remove version numbers from CSS and JS files
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_remove_cssjs_ver');
 
-		//Filters
+		// Filters
 		// Remove pingbacks
 		$this->loader->add_filter( 'wp_headers', $plugin_public, 'studio_manager_remove_x_pingback' );
 		// Add post, page or product slug class to body class
 		$this->loader->add_filter( 'body_class', $plugin_public, 'studio_manager_body_class_slug' );
 
 		// Images
-		// Remove default image sizes
-		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'studio_manager_remove_default_image_sizes' );
+		// Actions
 		// Add custom image sizes
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_add_images_size' );
+		
+		// Filters
+		// Remove default image sizes
+		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'studio_manager_remove_default_image_sizes' );
+		// Remove thumbnail dimensions
+		$this->loader->add_filter( 'post_thumbnail_html', $plugin_public, 'studio_manager_remove_thumbnail_dimensions' );
+		$this->loader->add_filter( 'image_send_to_editor', $plugin_public, 'studio_manager_remove_thumbnail_dimensions' );
 
 	}
 

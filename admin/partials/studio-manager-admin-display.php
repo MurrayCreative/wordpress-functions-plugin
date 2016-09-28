@@ -47,9 +47,11 @@
 	// Link login logo to homepage
 	$login_logo_link = $options['login_logo_link'];
 
-	/* Image sizes ========================================================================== */ 
+	/* Image sizes ========================================================================== */
 	// Remove default image sizes
-	$remove_default_image_sizes = $options['remove_default_image_sizes'];
+	$remove_default_image_sizes = $options['remove_default_image_sizes']; 
+	// Remove default image sizes
+	$remove_thumbnail_dimensions = $options['remove_thumbnail_dimensions'];
 	// New custom image sizes
 	$new_images_size = $options['new_images_size'];
 	// Existing custom image sizes

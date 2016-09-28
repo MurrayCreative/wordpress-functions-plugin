@@ -18,6 +18,16 @@
 				</fieldset>
 
 
+				<!-- Remove thumbnail dimensions -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Remove thumbnail dimensions', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-remove_thumbnail_dimensions">
+					<input type="checkbox" id="<?php echo $this->plugin_name;?>-remove_thumbnail_dimensions" name="<?php echo $this->plugin_name;?>[remove_thumbnail_dimensions]" value="1" <?php checked( $remove_thumbnail_dimensions, 1 ); ?> />
+					<span><?php esc_attr_e( 'Remove thumbnail dimensions', $this->plugin_name ); ?></span>
+					</label>
+				</fieldset>
+
+
 				<!-- Add images sizes -->
 				<fieldset>
 					<h3 class="section-subheading"><?php _e('Add custom image sizes for media images', $this->plugin_name);?></h3>

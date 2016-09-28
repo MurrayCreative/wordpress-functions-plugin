@@ -198,6 +198,18 @@ class Studio_Manager_Public {
 		}
 	}
 
+
+	// Remove thumbnail dimensions
+	public function studio_manager_remove_thumbnail_dimensions( $html ){
+		if(!empty($this->studio_manager_options['remove_thumbnail_dimensions'])){
+			$html = preg_replace('/(width|height)=\"\d*\"\s/', "", $html);
+			return $html;
+		} else {
+			return $html;
+		}
+	}
+
+
 	// Add new images size
 	public function studio_manager_add_images_size(){
 		if(is_array($this->studio_manager_options['images_size_arr'])):
