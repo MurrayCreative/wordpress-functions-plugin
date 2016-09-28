@@ -5,7 +5,7 @@
 				<!-- remove some meta and generators from the <head> -->
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e('Clean WordPress head section', $this->plugin_name);?></span></legend>
-					<label for="<?php echo $this->plugin_name;?>-cleanup" class="checkbox-label">
+					<label for="<?php echo $this->plugin_name;?>-cleanup">
 					<input type="checkbox" id="<?php echo $this->plugin_name;?>-cleanup" name="<?php echo $this->plugin_name;?>[cleanup]" value="1" <?php checked( $cleanup, 1 ); ?> />
 					<span><?php esc_attr_e( 'Clean up the head section', $this->plugin_name ); ?></span>
 					</label>

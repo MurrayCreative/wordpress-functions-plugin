@@ -195,6 +195,8 @@ class Studio_Manager_Admin {
 		if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {
 			// Get all existing custom image sizes
 			$existing_images_sizes = $input['existing_images_size'];
+			// print_r($existing_images_sizes);
+
 			// Loop through existing custom image sizes
 			foreach($existing_images_sizes as $existing_images_size_name => $existing_images_size_value):
 
@@ -224,6 +226,14 @@ class Studio_Manager_Admin {
 					if(isset($existing_images_sizes[$existing_images_size_name]['crop'][0]) && isset($existing_images_sizes[$existing_images_size_name]['crop'][1])){
 						$existing_images_sizes[$existing_images_size_name]['crop'] = array($existing_images_sizes[$existing_images_size_name]['crop_horizontal'], $existing_images_sizes[$existing_images_size_name]['crop_vertical']);
 					}
+				}
+
+				// Check if the checkbox to remove image size is checked
+				if(isset($existing_images_sizes[$existing_images_size_name]['remove'])){
+					// Get the position of the image size in the existing_images_sizes array
+					$image_size_index = array_search($existing_images_sizes[$existing_images_size_name]['name'], array_keys($existing_images_sizes));
+					// Remove the size from the array
+					array_splice($existing_images_sizes, $image_size_index, 1);
 				}
 
 			endforeach;
@@ -278,7 +288,7 @@ class Studio_Manager_Admin {
 
 				// Check if images should be cropped
 				if(!isset($input['images_size']['crop'])){
-					$new_images_size[$images_size_slug]['crop'] = 0;
+					$new_images_size[$images_size_slug]['crop'] = 2;
 				} else if(isset($input['images_size']['crop'])){
 					if(empty($input['images_size']['crop_horizontal'])){
 						add_settings_error(
