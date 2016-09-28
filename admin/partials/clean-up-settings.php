@@ -51,6 +51,6 @@
 					</label>
 				</fieldset>
 
-				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
+				<?php submit_button(__('Save Changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 			</div>
 			<!-- End of Clean Ups -->

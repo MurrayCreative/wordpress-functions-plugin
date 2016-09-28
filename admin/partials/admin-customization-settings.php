@@ -55,6 +55,6 @@
 					<input type="text" class="regular-text" id="<?php echo $this->plugin_name;?>-admin_footer_text" name="<?php echo $this->plugin_name;?>[admin_footer_text]" value="<?php if(!empty($admin_footer_text)) esc_attr_e($admin_footer_text, $this->plugin_name);?>" placeholder="<?php esc_attr_e('Theme created for your awesome business', $this->plugin_name);?>" />
 				</fieldset>
 
-				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
+				<?php submit_button(__('Save Changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 			</div>
 			<!-- End of Admin Customisations -->

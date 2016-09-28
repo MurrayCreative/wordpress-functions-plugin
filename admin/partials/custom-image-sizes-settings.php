@@ -86,6 +86,8 @@
 								</label>
 							</fieldset>
 						</div>
+
+						<?php submit_button(__('Add Image Size', $this->plugin_name), 'primary','submit', TRUE); ?>
 					</fieldset>
 
 
@@ -169,12 +171,12 @@
 										<!-- End of Remove Image Size -->
 
 									</fieldset>
-										
+
 								<?php endforeach;?>
 							<?php endif;?>
 					</fieldset>
 				</fieldset>
 
-				<?php submit_button(__('Save changes', $this->plugin_name), 'primary','submit', TRUE); ?>
+				<?php submit_button(__('Save Changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 			</div>
 			<!-- End of Custom Image Sizes -->
