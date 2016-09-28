@@ -111,7 +111,6 @@ class Studio_Manager_Public {
 
         if($this->studio_manager_options['cleanup']){
 
-
             remove_action( 'wp_head', 'rsd_link' ); // RSD link
             remove_action( 'wp_head', 'feed_links_extra', 3 ); // Category feed link
             remove_action( 'wp_head', 'feed_links', 2 ); // Post and comment feed links
@@ -129,8 +128,8 @@ class Studio_Manager_Public {
             remove_action( 'wp_print_styles', 'print_emoji_styles' );
             remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
-
         }
+
     }   
     // Cleanup head
     public function studio_manager_remove_x_pingback($headers) {
@@ -185,6 +184,19 @@ class Studio_Manager_Public {
 		}
 	}
 
+
+	// Remove default image sizes
+	public function studio_manager_remove_default_image_sizes(){
+		if(!empty($this->studio_manager_options['remove_default_image_sizes'])){
+			function remove_default_image_sizes_filter($sizes) {
+				unset( $sizes['thumbnail']);
+				unset( $sizes['medium']);
+				unset( $sizes['large']);
+				return $sizes;
+			}
+			add_filter('intermediate_image_sizes_advanced', 'remove_default_image_sizes_filter');
+		}
+	}
 
 	// Add new images size
 	public function studio_manager_add_images_size(){

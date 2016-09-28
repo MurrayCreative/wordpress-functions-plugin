@@ -48,6 +48,8 @@
 	$login_logo_link = $options['login_logo_link'];
 
 	/* Image sizes ========================================================================== */ 
+	// Remove default image sizes
+	$remove_default_image_sizes = $options['remove_default_image_sizes'];
 	// New custom image sizes
 	$new_images_size = $options['new_images_size'];
 	// Existing custom image sizes
@@ -78,19 +80,16 @@
 				// Set up hidden fields
 				settings_fields( $this->plugin_name );
 				do_settings_sections( $this->plugin_name );
-			?>
 
-			<?php
-
+				// Partial includes
 				require_once('clean-up-settings.php');
 				require_once('login-page-settings.php');
 				require_once('custom-image-sizes-settings.php');
 				require_once('admin-customization-settings.php');
 
+				// Save All Changes button
+				submit_button(__('Save All Changes', $this->plugin_name), 'primary','submit', TRUE);
 			?>
-
-
-			<?php submit_button(__('Save All Changes', $this->plugin_name), 'primary','submit', TRUE); ?>
 
 		</form>
 

@@ -190,6 +190,9 @@ class Studio_Manager_Admin {
 		// Link login page logo to homepage instead of WordPress.org
 		$valid['login_logo_link'] = (isset($input['login_logo_link']) && !empty($input['login_logo_link'])) ? 1 : 0;
 
+		// Link login page logo to homepage instead of WordPress.org
+		$valid['remove_default_image_sizes'] = (isset($input['remove_default_image_sizes']) && !empty($input['remove_default_image_sizes'])) ? 1 : 0;
+
 
 		// Custom Image Sizes
 		if(isset($input['existing_images_size']) && is_array($input['existing_images_size'])) {

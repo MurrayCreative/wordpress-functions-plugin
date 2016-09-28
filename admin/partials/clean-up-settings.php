@@ -2,7 +2,7 @@
 			<div class="section-wrapper">
 				<h2 class="section-title"><?php _e('Clean Up', $this->plugin_name);?></h2>
 
-				<!-- remove some meta and generators from the <head> -->
+				<!-- Remove some meta and generators from the <head> -->
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e('Clean WordPress head section', $this->plugin_name);?></span></legend>
 					<label for="<?php echo $this->plugin_name;?>-cleanup">
@@ -12,7 +12,7 @@
 				</fieldset>
 
 
-				<!-- add post,page or product slug class to body class -->
+				<!-- Add post, page or product slug class to body class -->
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e('Add Post, page or product slug to body class', $this->plugin_name);?></span></legend>
 					<label for="<?php echo $this->plugin_name;?>-body_class_slug">
@@ -42,7 +42,7 @@
 				</fieldset>
 
 
-				<!-- remove css and js query string versions -->
+				<!-- Remove css and js query string versions -->
 				<fieldset>
 					<legend class="screen-reader-text"><span><?php _e('Remove CSS and JS files query string versions', $this->plugin_name);?></span></legend>
 					<label for="<?php echo $this->plugin_name;?>-css_js_versions">

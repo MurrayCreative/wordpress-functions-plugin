@@ -19,8 +19,7 @@
              $showNewHardCrop = $('.new-images-size-crop'),
              $showNewHardCropPositions = $('.new-hard-crop-positions'),
              $showExistingHardCrop = $('.existing-images-size-crop'),
-             $showExistingHardCropPositions = $('.existing-hard-crop-positions'),
-             $showExistingRemove = $('.existing-images-size-remove');
+             $showExistingHardCropPositions = $('.existing-hard-crop-positions');
 
 
         // wp.media add Image
@@ -104,12 +103,6 @@
 			}else{
 				$(this).parent().find('.existing-hard-crop-positions').addClass('hidden');
 			}
-		});
-
-
-		// Show / hide the hard crop options for existing image sizes
-		$showExistingRemove.on('change', function() {
-			console.log($(this).parent());
 		});
 
 

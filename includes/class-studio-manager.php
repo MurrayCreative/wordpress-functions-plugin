@@ -216,6 +216,8 @@ class Studio_Manager {
 		$this->loader->add_filter( 'body_class', $plugin_public, 'studio_manager_body_class_slug' );
 
 		// Images
+		// Remove default image sizes
+		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'studio_manager_remove_default_image_sizes' );
 		// Add custom image sizes
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_add_images_size' );
 
