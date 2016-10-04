@@ -3,6 +3,10 @@
 * admin/js/studio-manager-admin.js
 *
 **/
+
+// @codekit-prepend "vendor/greensock/TweenLite.min.js";
+// @codekit-prepend "vendor/greensock/plugins/ScrollToPlugin.min.js";
+
 (function( $ ) {
     'use strict';
 
@@ -117,12 +121,12 @@
 		// Section Tabs
 		$('.section-link').on('click', function(event) {
 			event.preventDefault();
-			var $targetSection = $(this).attr('href');
-			console.log( $targetSection );
+			var targetSection = $(this).attr('href');
+			var $target = $( targetSection );
 
-			$('html, body').animate({
-				scrollTop: $($targetSection).offset().top - 28
-			}, 300);
+			TweenLite.to(window, 0.5, {scrollTo: {y:$target.position().top}, ease:Power2.easeOut});
+			console.log( 'Scrollin' );
+
 		});
 
 
