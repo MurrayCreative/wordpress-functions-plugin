@@ -1,5 +1,5 @@
 			<!-- Admin Customisations -->
-			<div class="section-wrapper">
+			<div class="section-wrapper" id="section-admin">
 				<h2 class="section-title"><?php _e('Admin Customisations', $this->plugin_name);?></h2>
 
 				<!-- Hide WordPress admin menu items -->

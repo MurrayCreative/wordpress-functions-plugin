@@ -2,10 +2,12 @@
     ==========================================================================
 
     STUDIO MANAGER
+    0. Mixins
     1. General
     2. Image Sizes
     3. WP Admin Area
     4. WordPress Login
+    5. Section Tabs
 
     CSS FORMATTING
     1. Positioning
@@ -15,6 +17,18 @@
 
     ==========================================================================
     ========================================================================== */
+
+
+/*  ==========================================================================
+    0. Mixins
+    ========================================================================== */
+.clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
 
 
 /*  ==========================================================================
@@ -28,10 +42,6 @@
 	margin-bottom: 28px;
 	padding: 28px;
 	border: solid 1px #b4b9be;
-
-	&:first-of-type {
-		margin-top: 14px;
-	}
 }
 
 .section-title {
@@ -172,4 +182,38 @@ input.short {
 		cursor: pointer;
 	}
 }
+
+
+/*  ==========================================================================
+    5. Section Tabs
+    ========================================================================== */
+.section-tabs {
+	@extend .clearfix;
+}
+
+.section-tab-list {
+	margin-bottom: 0px;
+	list-style: none;
+}
+
+.section-tab {
+	display: inline-block;
+	margin: 0px;
+}
+
+.section-link {
+	display: block;
+	padding: 1rem 2rem;
+	background-color: #333333;
+	text-decoration: none;
+	// text-transform: uppercase;
+	color: white;
+
+	&:hover, &:active, &:focus {
+		background-color: #555555;
+		color: white;
+	}
+}
+
+
 
