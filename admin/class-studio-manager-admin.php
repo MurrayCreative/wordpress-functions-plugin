@@ -99,7 +99,8 @@ class Studio_Manager_Admin {
         if ( 'settings_page_studio-manager' == get_current_screen() -> id ) {
             wp_enqueue_media();
         }
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/studio-manager-admin.js', array( 'jquery' ), $this->version, false );
+		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/studio-manager-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/min/studio-manager-admin-min.js', array( 'jquery' ), $this->version, false );
 
 	}
 
