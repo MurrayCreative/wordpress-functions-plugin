@@ -49,9 +49,11 @@
 
 	/* Image sizes ========================================================================== */
 	// Remove default image sizes
-	$remove_default_image_sizes = $options['remove_default_image_sizes']; 
+	$remove_default_image_sizes = $options['remove_default_image_sizes'];
 	// Remove default image sizes
 	$remove_thumbnail_dimensions = $options['remove_thumbnail_dimensions'];
+	// Remove default image sizes
+	$custom_jpeg_quality = $options['custom_jpeg_quality'];
 	// New custom image sizes
 	$new_images_size = $options['new_images_size'];
 	// Existing custom image sizes

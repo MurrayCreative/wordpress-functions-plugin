@@ -210,6 +210,19 @@ class Studio_Manager_Public {
 	}
 
 
+	// Custom JPEG output quality
+	public function studio_manager_custom_jpeg_quality( $quality, $context ){
+		if(!empty($this->studio_manager_options['custom_jpeg_quality'])){
+			// return $this->studio_manager_options['custom_jpeg_quality'];
+			var_dump($this->studio_manager_options['custom_jpeg_quality']);
+			return 10;
+		} else {
+			var_dump($this->studio_manager_options['custom_jpeg_quality']);
+			return 100;
+		}
+	}
+
+
 	// Add new images size
 	public function studio_manager_add_images_size(){
 		if(is_array($this->studio_manager_options['images_size_arr'])):

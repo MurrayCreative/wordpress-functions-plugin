@@ -219,13 +219,15 @@ class Studio_Manager {
 		// Actions
 		// Add custom image sizes
 		$this->loader->add_action( 'after_setup_theme', $plugin_public, 'studio_manager_add_images_size' );
-		
+
 		// Filters
 		// Remove default image sizes
 		$this->loader->add_filter( 'after_setup_theme', $plugin_public, 'studio_manager_remove_default_image_sizes' );
 		// Remove thumbnail dimensions
 		$this->loader->add_filter( 'post_thumbnail_html', $plugin_public, 'studio_manager_remove_thumbnail_dimensions' );
 		$this->loader->add_filter( 'image_send_to_editor', $plugin_public, 'studio_manager_remove_thumbnail_dimensions' );
+		// Custom JPEG output quality
+		$this->loader->add_filter( 'jpeg_quality', $plugin_public, 'studio_manager_custom_jpeg_quality' );
 
 	}
 

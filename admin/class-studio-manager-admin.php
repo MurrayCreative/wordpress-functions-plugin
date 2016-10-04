@@ -190,11 +190,14 @@ class Studio_Manager_Admin {
 		// Link login page logo to homepage instead of WordPress.org
 		$valid['login_logo_link'] = (isset($input['login_logo_link']) && !empty($input['login_logo_link'])) ? 1 : 0;
 
-		// Link login page logo to homepage instead of WordPress.org
+		// Remove default image sizes
 		$valid['remove_default_image_sizes'] = (isset($input['remove_default_image_sizes']) && !empty($input['remove_default_image_sizes'])) ? 1 : 0;
 
-		// Link login page logo to homepage instead of WordPress.org
+		// Remove thumbnail dimensions
 		$valid['remove_thumbnail_dimensions'] = (isset($input['remove_thumbnail_dimensions']) && !empty($input['remove_thumbnail_dimensions'])) ? 1 : 0;
+
+		// Custom JPEG output quality
+		$valid['custom_jpeg_quality'] = (isset($input['custom_jpeg_quality']) && !empty($input['custom_jpeg_quality'])) ? $images_size_name = sanitize_text_field($input['custom_jpeg_quality']) : 100;
 
 
 		// Custom Image Sizes

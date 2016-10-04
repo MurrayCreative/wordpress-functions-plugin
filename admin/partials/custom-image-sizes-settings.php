@@ -28,6 +28,14 @@
 				</fieldset>
 
 
+				<!-- Custom JPEG Output Quality -->
+				<fieldset>
+					<legend class="screen-reader-text"><span><?php _e('Custom JPEG Output Quality', $this->plugin_name);?></span></legend>
+					<label for="<?php echo $this->plugin_name;?>-custom_jpeg_quality">Custom JPEG Output Quality</label>
+					<input name="<?php echo $this->plugin_name;?>[custom_jpeg_quality]" type="number" step="1" min="0" max="100" id="<?php echo $this->plugin_name;?>-custom_jpeg_quality" placeholder="80" class="small-text" value="<?php echo $custom_jpeg_quality;?>">
+				</fieldset>
+
+
 				<!-- Add images sizes -->
 				<fieldset>
 					<h3 class="section-subheading"><?php _e('Add custom image sizes for media images', $this->plugin_name);?></h3>
