@@ -1,6 +1,6 @@
 /**
 *
-* admin/js/wp-cbf-admin.js
+* admin/js/studio-manager-admin.js
 *
 **/
 (function( $ ) {
@@ -67,8 +67,8 @@
 
 
         // Erase image url and age preview
-        imgDelButton.on('click', function(e){
-            e.preventDefault();
+        imgDelButton.on('click', function(event){
+            event.preventDefault();
             imgIdInput.val('');
             imgPreview.find( 'img' ).attr( 'src', '' );
             imgPreview.addClass('hidden');
@@ -111,6 +111,18 @@
 			if($(this).is(':checked')) {
 				$(this).parent().find('.existing-hard-crop-positions').removeClass('hidden');
 			}
+		});
+
+
+		// Section Tabs
+		$('.section-link').on('click', function(event) {
+			event.preventDefault();
+			var $targetSection = $(this).attr('href');
+			console.log( $targetSection );
+
+			$('html, body').animate({
+				scrollTop: $($targetSection).offset().top - 28
+			}, 300);
 		});
 
 

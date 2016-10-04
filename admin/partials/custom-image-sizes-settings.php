@@ -1,5 +1,5 @@
 			<!-- Custom Image Sizes -->
-			<div class="section-wrapper">
+			<div class="section-wrapper" id="section-images">
 				<h2 class="section-title"><?php _e('Custom Image Sizes', $this->plugin_name);?></h2>
 
 				<?php global $_wp_additional_image_sizes;

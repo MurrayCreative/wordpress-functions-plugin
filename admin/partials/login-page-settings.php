@@ -1,6 +1,6 @@
 			<!-- Login page customizations -->
-			<div class="section-wrapper">
-				<h2 class="section-title"><?php _e('Login customization', $this->plugin_name);?></h2>
+			<div class="section-wrapper" id="section-login">
+				<h2 class="section-title"><?php _e('Login customizations', $this->plugin_name);?></h2>
 
 				<!-- Add client logo to login -->
 				<fieldset>

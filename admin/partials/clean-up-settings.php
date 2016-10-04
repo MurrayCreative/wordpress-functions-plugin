@@ -1,5 +1,5 @@
 			<!-- Clean Ups -->
-			<div class="section-wrapper">
+			<div class="section-wrapper" id="section-cleanup">
 				<h2 class="section-title"><?php _e('Clean Up', $this->plugin_name);?></h2>
 
 				<!-- Remove some meta and generators from the <head> -->

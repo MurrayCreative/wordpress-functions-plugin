@@ -76,6 +76,15 @@
 
 	<h1 class="plugin-title"><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
+	<div class="section-tabs">
+		<ul class="section-tab-list">
+			<li class="section-tab"><a href="#section-cleanup" class="section-link">Clean Up</a></li>
+			<li class="section-tab"><a href="#section-login" class="section-link">Login Customizations</a></li>
+			<li class="section-tab"><a href="#section-images" class="section-link">Custom Image Sizes</a></li>
+			<li class="section-tab"><a href="#section-admin" class="section-link">Admin Customizations</a></li>
+		</ul>
+	</div>
+
 	<div class="form-wrapper">
 
 		<form method="post" name="cleanup_options" action="options.php">
