@@ -178,7 +178,7 @@ class Studio_Manager {
 
 		// Save / Update our plugin options
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'options_update' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'studio_manager_admin_scripts' );
+		// $this->loader->add_action( 'admin_init', $plugin_admin, 'studio_manager_admin_scripts' );
 
 	}
 
