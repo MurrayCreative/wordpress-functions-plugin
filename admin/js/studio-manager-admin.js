@@ -6,6 +6,7 @@
 
 // @codekit-prepend "vendor/greensock/TweenLite.min.js";
 // @codekit-prepend "vendor/greensock/plugins/ScrollToPlugin.min.js";
+// @codekit-prepend "vendor/jquery.validate.min.js";
 
 (function( $ ) {
     'use strict';
@@ -125,9 +126,48 @@
 			var $target = $( targetSection );
 
 			TweenLite.to(window, 0.5, {scrollTo: {y:$target.position().top}, ease:Power2.easeOut});
-			console.log( 'Scrollin' );
 
 		});
+
+
+		// // AJAX Save
+		// $('#studio-manager-options-form').submit(function() {
+		// 	// console.log('Form submitted');
+		// 	$('.button-primary').attr("disabled", true);
+
+		// 	// $(this).validate({ // validate the form
+		// 	// 	rules: {
+		// 	// 		studio-manager[existing_images_size][article_thumb][width]: {
+		// 	// 			required: true,
+		// 	// 			email: true
+		// 	// 		},
+		// 	// 		studio-manager[existing_images_size][article_thumb][height]: {
+		// 	// 			required: true,
+		// 	// 			minlength: 5
+		// 	// 		}
+		// 	// 	}
+		// 	// });
+
+		// 	$(this).ajaxSubmit({
+		// 		success: function(){
+		// 			$('#save-result').html("<div id='save-message' class='save-feedback-modal save-feedback-success'></div>");
+		// 			$('#save-message').append("<p>Settings Saved Successfully.</p>").show();
+		// 			$('.button-primary').attr("disabled", false);
+		// 		},
+		// 		error: function(){
+		// 			$('#save-result').html("<div id='save-message' class='save-feedback-modal save-feedback-error'></div>");
+		// 			$('#save-message').append("<p>Settings Not Saved.</p>").show();
+		// 			$('.button-primary').attr("disabled", false);
+		// 		},
+		// 		timeout: 10000
+		// 	});
+
+		// 	setTimeout(function() {
+		// 		$('#save-message').fadeOut('fast');
+		// 	}, 3000);
+		// 	return false;
+			
+		// });
 
 
     }); // End of DOM Ready
