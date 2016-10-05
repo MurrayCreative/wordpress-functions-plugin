@@ -42,7 +42,7 @@
 	/* Login customisations ========================================================================== */ 
 	// Custom WP login page logo
 	$login_logo_id = isset($options['login_logo_id']) ? $options['login_logo_id'] : '';
-	$login_logo = wp_get_attachment_image_src( $login_logo_id, 'thumbnail' );
+	$login_logo = wp_get_attachment_image_src( $login_logo_id, 'article_thumb' );
 	$login_logo_url = $login_logo[0];
 	// Link login logo to homepage
 	$login_logo_link = $options['login_logo_link'];
@@ -87,7 +87,7 @@
 
 	<div class="form-wrapper">
 
-		<form method="post" name="cleanup_options" action="options.php">
+		<form method="post" name="cleanup_options" action="options.php" id="studio-manager-options-form">
 
 			<?php
 				// Set up hidden fields
@@ -105,6 +105,8 @@
 			?>
 
 		</form>
+
+		<div id="save-result"></div>
 
 	</div>
 

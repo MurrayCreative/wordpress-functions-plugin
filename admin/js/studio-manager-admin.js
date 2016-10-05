@@ -125,8 +125,29 @@
 			var $target = $( targetSection );
 
 			TweenLite.to(window, 0.5, {scrollTo: {y:$target.position().top}, ease:Power2.easeOut});
-			console.log( 'Scrollin' );
 
+		});
+
+
+		// AJAX Save
+		$('#studio-manager-options-form').submit(function() {
+			// console.log('Form submitted');
+			$(this).ajaxSubmit({
+				success: function(){
+					$('#save-result').html("<div id='save-message' class='save-feedback-modal'></div>");
+					$('#save-message').append("<p>Settings Saved Successfully.</p>").show();
+				},
+				error: function(){
+					$('#save-result').html("<div id='save-message' class='save-feedback-modal'></div>");
+					$('#save-message').append("<p>Settings Not Saved.</p>").show();
+				},
+				timeout: 10000
+			});
+			
+			setTimeout(function() {
+				$('#save-message').fadeOut('fast');
+			}, 3000);
+			return false;
 		});
 
 

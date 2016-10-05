@@ -1,3 +1,189 @@
-.clearfix:after,.section-tabs:after{content:"";display:table;clear:both}.plugin-title{margin-bottom:28px}.section-wrapper{margin-bottom:28px;padding:28px;border:solid 1px #b4b9be}.section-title{margin-top:0px;font-size:21px}.section-subheading{margin-top:20px;font-size:16px}.action-subheading{font-size:14px}.form-wrapper fieldset{min-height:32px}.checkbox-label{margin:7px 0px}input[type=url]{margin:0 0 14px}.new-hard-crop-positions,.existing-hard-crop-positions{margin:14px 0px}.existing-images-size{position:relative;margin:14px 0px;padding:28px;border:solid 1px #b4b9be}.existing-images-size h4{float:left;margin-right:28px}.existing-images-size input[type="number"]{margin:14px 0 7px}p.updated{background:#fff;border-left:4px solid #7ad03a;box-shadow:0 1px 1px 0 rgba(0,0,0,0.1);margin:7px 0 2px;padding:1px 14px}.field-container{margin-bottom:28px}.field-container label{display:block;font-weight:700}input.short{border-color:#e35b5b}.studio_manager-upload-preview{min-height:100px;position:relative}.studio_manager-upload-preview img{max-width:150px;height:auto}.studio_manager-delete-image{position:absolute;top:0;width:24px;height:24px;background:#222;color:#fff;text-align:center;border:2px solid #fff;border-radius:50%;line-height:10px;padding:0px;cursor:pointer;box-shadow:0px 0px 2px -1px #222}.studio_manager-admin-menu-items{margin-bottom:28px;line-height:28px}.studio_manager-admin-menu-items h4{margin-bottom:7px}.studio-manager-upload-preview{position:relative;margin-top:21px;padding:21px}.studio-manager-delete-image{position:absolute;width:28px;height:28px;top:0px;left:0px;background-color:black;border-radius:14px;border:none;color:white;font-size:14px;content:''}.studio-manager-delete-image:hover{background-color:#333333;cursor:pointer}.section-tab-list{margin-bottom:0px;list-style:none}.section-tab{display:inline-block;margin:0px}.section-link{display:block;padding:1rem 2rem;background-color:#333333;text-decoration:none;color:white}.section-link:hover,.section-link:active,.section-link:focus{background-color:#555555;color:white}
+ /*  ==========================================================================
+    ==========================================================================
 
-/*# sourceMappingURL=studio-manager-admin.css.map */
+    STUDIO MANAGER
+    0. Mixins
+    1. General
+    2. Image Sizes
+    3. WP Admin Area
+    4. WordPress Login
+    5. Section Tabs
+    6. Save Feedback Modal
+
+    CSS FORMATTING
+    1. Positioning
+    2. Display & Box Model
+    3. Text
+    4. Other
+
+    ==========================================================================
+    ========================================================================== */
+/*  ==========================================================================
+    0. Mixins
+    ========================================================================== */
+.clearfix:after, .section-tabs:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+/*  ==========================================================================
+    1. General
+    ========================================================================== */
+.plugin-title {
+  margin-bottom: 28px; }
+
+.section-wrapper {
+  margin-bottom: 28px;
+  padding: 28px;
+  border: solid 1px #b4b9be; }
+
+.section-title {
+  margin-top: 0px;
+  font-size: 21px; }
+
+.section-subheading {
+  margin-top: 20px;
+  font-size: 16px; }
+
+.action-subheading {
+  font-size: 14px; }
+
+.form-wrapper fieldset {
+  min-height: 32px; }
+
+.checkbox-label {
+  margin: 7px 0px; }
+
+input[type=url] {
+  margin: 0 0 14px; }
+
+/*  ==========================================================================
+    2. Image Sizes
+    ========================================================================== */
+.new-hard-crop-positions, .existing-hard-crop-positions {
+  margin: 14px 0px; }
+
+.existing-images-size {
+  position: relative;
+  margin: 14px 0px;
+  padding: 28px;
+  border: solid 1px #b4b9be; }
+  .existing-images-size h4 {
+    float: left;
+    margin-right: 28px; }
+  .existing-images-size input[type="number"] {
+    margin: 14px 0 7px; }
+
+/*  ==========================================================================
+    3. WP Admin Area
+    ========================================================================== */
+p.updated {
+  background: #fff;
+  border-left: 4px solid #7ad03a;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  margin: 7px 0 2px;
+  padding: 1px 14px; }
+
+.field-container {
+  margin-bottom: 28px; }
+
+.field-container label {
+  display: block;
+  font-weight: 700; }
+
+input.short {
+  border-color: #e35b5b; }
+
+.studio_manager-upload-preview {
+  min-height: 100px;
+  position: relative; }
+  .studio_manager-upload-preview img {
+    max-width: 150px;
+    height: auto; }
+
+.studio_manager-delete-image {
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  line-height: 10px;
+  padding: 0px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px -1px #222; }
+
+.studio_manager-admin-menu-items {
+  margin-bottom: 28px;
+  line-height: 28px; }
+  .studio_manager-admin-menu-items h4 {
+    margin-bottom: 7px; }
+
+/*  ==========================================================================
+    4. WordPress Login
+    ========================================================================== */
+.studio-manager-upload-preview {
+  position: relative;
+  margin-top: 21px;
+  padding: 21px; }
+
+.studio-manager-delete-image {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 0px;
+  left: 0px;
+  /*background: url('../../images/close-button.png');*/
+  background-color: black;
+  border-radius: 14px;
+  border: none;
+  color: white;
+  font-size: 14px;
+  content: ''; }
+  .studio-manager-delete-image:hover {
+    background-color: #333333;
+    cursor: pointer; }
+
+/*  ==========================================================================
+    5. Section Tabs
+    ========================================================================== */
+.section-tab-list {
+  margin-bottom: 0px;
+  list-style: none; }
+
+.section-tab {
+  display: inline-block;
+  margin: 0px; }
+
+.section-link {
+  display: block;
+  padding: 1rem 2rem;
+  background-color: #333333;
+  text-decoration: none;
+  color: white; }
+  .section-link:hover, .section-link:active, .section-link:focus {
+    background-color: #555555;
+    color: white; }
+
+/*  ==========================================================================
+    6. Save Feedback Modal
+    ========================================================================== */
+.save-feedback-modal {
+  display: block;
+  position: fixed;
+  top: 45%;
+  left: 25%;
+  width: 50%;
+  height: auto;
+  padding: 5px 20px;
+  border: 3px solid green;
+  background-color: #eeffee;
+  overflow: auto;
+  border-radius: 4px;
+  box-shadow: 5px 5px 10px #cfcfcf;
+  text-align: center;
+  z-index: 100; }

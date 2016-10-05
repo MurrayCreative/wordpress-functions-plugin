@@ -162,9 +162,6 @@ class Studio_Manager {
 		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 		$this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'add_action_links' );
 
-		// Save / Update our plugin options
-		$this->loader->add_action('admin_init', $plugin_admin, 'options_update');
-
         // Admin Customizations
         // Set admin custom footer text
 		$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'studio_manager_admin_footer_text');
@@ -178,6 +175,10 @@ class Studio_Manager {
 		$this->loader->add_action( 'login_headerurl', $plugin_admin, 'studio_manager_login_logo_link' );
 		// Change the title on the login page logo to Blog Title
 		$this->loader->add_action( 'login_headertitle', $plugin_admin, 'studio_manager_login_logo_headertitle' );
+
+		// Save / Update our plugin options
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'options_update' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'studio_manager_admin_scripts' );
 
 	}
 

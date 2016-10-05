@@ -447,6 +447,16 @@ class Studio_Manager_Admin {
 		}
 	}
 
+	public function studio_manager_admin_scripts() {
+		if ( is_admin() ) { // for Admin Dashboard Only
+			// Embed the Script on our Plugin's Option Page Only
+			if ( isset($_GET['page']) && $_GET['page'] == 'studio-manager' ) {
+				wp_enqueue_script('jquery');
+				wp_enqueue_script( 'jquery-form' );
+			}
+		}
+	}
+
 
     /**
      * Admin customizations Functions
