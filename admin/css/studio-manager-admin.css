@@ -180,10 +180,15 @@ input.short {
   width: 50%;
   height: auto;
   padding: 5px 20px;
-  border: 3px solid green;
-  background-color: #eeffee;
   overflow: auto;
   border-radius: 4px;
   box-shadow: 5px 5px 10px #cfcfcf;
   text-align: center;
+  color: white;
   z-index: 100; }
+
+.save-feedback-success {
+  background-color: green; }
+
+.save-feedback-error {
+  background-color: red; }
