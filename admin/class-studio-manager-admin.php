@@ -256,7 +256,7 @@ class Studio_Manager_Admin {
 		$new_images_size = array();
 
 		// If there are new image sizes defined
-		if(isset( $input['new_images_size']) &&  !empty($input['new_images_size']) ){
+		if(isset( $input['images_size']['name']) &&  !empty($input['images_size']['name']) ){
 			// Get image size slug
 			$images_size_slug = sanitize_title($input['images_size']['name']);
 			// Get image size name
@@ -335,7 +335,7 @@ class Studio_Manager_Admin {
 
         // Admin Customisations
         // Change WordPress admin footer text
-        $valid['admin_footer_text'] = (isset($input['admin_footer_text']) && !empty($input['admin_footer_text'])) ? wp_kses($input['admin_footer_text'], array('a' => array( 'href' => array(), 'title' => array()))) : '';
+        $valid['admin_footer_text'] = (isset($input['admin_footer_text']) && !empty($input['admin_footer_text'])) ? wp_kses($input['admin_footer_text'], array('a' => array( 'href' => array(), 'title' => array(), 'target' => array()))) : '';
 
         // Remove wp icon from admin bar
         $valid['remove_admin_bar_icon'] = (isset($input['remove_admin_bar_icon']) && !empty($input['remove_admin_bar_icon'])) ? 1 : 0;
