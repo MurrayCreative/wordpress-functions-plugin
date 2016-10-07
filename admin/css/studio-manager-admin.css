@@ -21,7 +21,7 @@
 /*  ==========================================================================
     0. Mixins
     ========================================================================== */
-.clearfix:after, .section-tabs:after {
+.clearfix:after, .new-hard-crop-positions:after, .existing-hard-crop-positions:after, .section-tabs:after {
   content: "";
   display: table;
   clear: both; }
@@ -54,6 +54,9 @@
 .checkbox-label {
   margin: 7px 0px; }
 
+.bold-label {
+  font-weight: 600; }
+
 input[type=url] {
   margin: 0 0 14px; }
 
@@ -61,7 +64,20 @@ input[type=url] {
     2. Image Sizes
     ========================================================================== */
 .new-hard-crop-positions, .existing-hard-crop-positions {
+  width: 100%;
   margin: 14px 0px; }
+
+.crop-positions-label {
+  margin-bottom: 14px;
+  font-weight: 600; }
+  .crop-positions-label label {
+    font-weight: 400; }
+
+.crop-positions {
+  margin: 7px 0px; }
+
+.remove-image-size-label {
+  font-weight: 600; }
 
 .existing-images-size {
   position: relative;
@@ -69,10 +85,15 @@ input[type=url] {
   padding: 28px;
   border: solid 1px #b4b9be; }
   .existing-images-size h4 {
-    float: left;
-    margin-right: 28px; }
+    font-size: 16px;
+    font-weight: 600; }
   .existing-images-size input[type="number"] {
     margin: 14px 0 7px; }
+
+.remove-image-size-wrapper {
+  display: block;
+  width: 100%;
+  margin-top: 21px; }
 
 /*  ==========================================================================
     3. WP Admin Area
@@ -137,8 +158,8 @@ input.short {
   height: 28px;
   top: 0px;
   left: 0px;
-  /*background: url('../../images/close-button.png');*/
-  background-color: black;
+  background: url("../../images/close-button.png");
+  background-size: 28px 28px;
   border-radius: 14px;
   border: none;
   color: white;

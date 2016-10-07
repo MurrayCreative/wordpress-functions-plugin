@@ -55,9 +55,11 @@
               var attachment = frame.state().get('selection').first().toJSON();    
 
               // console.log(attachment);
+              // console.log(attachment.url);
 
               // Send the attachment URL to our custom image input field.
-              imgPreview.find( 'img' ).attr( 'src', attachment.sizes.thumbnail.url );
+              // imgPreview.find( 'img' ).attr( 'src', attachment.sizes.thumbnail.url );
+              imgPreview.find( 'img' ).attr( 'src', attachment.url );
 
               // Send the attachment id to our hidden input
               imgIdInput.val( attachment.id );
