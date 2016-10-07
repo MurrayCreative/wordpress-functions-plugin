@@ -51,6 +51,10 @@
 .form-wrapper fieldset {
   min-height: 32px; }
 
+.fieldset-wrapper {
+  display: block;
+  margin: 7px 0px; }
+
 .checkbox-label {
   margin: 7px 0px; }
 
@@ -63,6 +67,9 @@ input[type=url] {
 /*  ==========================================================================
     2. Image Sizes
     ========================================================================== */
+.add-image-size-title {
+  margin-top: 42px; }
+
 .new-hard-crop-positions, .existing-hard-crop-positions {
   width: 100%;
   margin: 14px 0px; }

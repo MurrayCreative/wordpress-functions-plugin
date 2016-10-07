@@ -38,21 +38,23 @@
 
 				<!-- Add images sizes -->
 				<fieldset>
-					<h3 class="section-subheading"><?php _e('Add custom image sizes for media images', $this->plugin_name);?></h3>
+					<h3 class="section-subheading add-image-size-title"><?php _e('Add custom image sizes for media images', $this->plugin_name);?></h3>
 
 					<fieldset class="new-images-size">
-						<label for="<?php echo $this->plugin_name;?>-new_images_size_name">
-							<?php esc_attr_e('New Images size name', $this->plugin_name);?>
-						</label>
-						<input id="<?php echo $this->plugin_name;?>-new_images_size_name" name="<?php echo $this->plugin_name;?>[images_size][name]" type="text" placeholder="ex: blog_featured">
+						<div class="fieldset-wrapper">
+							<label for="<?php echo $this->plugin_name;?>-new_images_size_name">
+								<?php esc_attr_e('New Images size name', $this->plugin_name);?>
+							</label>
+							<input id="<?php echo $this->plugin_name;?>-new_images_size_name" name="<?php echo $this->plugin_name;?>[images_size][name]" type="text" placeholder="ex: blog_featured">
+						</div>
 
-						<br/>
+						<div class="fieldset-wrapper">
+							<label for="t<?php echo $this->plugin_name;?>-new_images_size_w">Width</label>
+							<input name="<?php echo $this->plugin_name;?>[images_size][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_w" placeholder="500" class="small-text">
 
-						<label for="t<?php echo $this->plugin_name;?>-new_images_size_w">Width</label>
-						<input name="<?php echo $this->plugin_name;?>[images_size][width]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_w" placeholder="500" class="small-text">
-						
-						<label for="<?php echo $this->plugin_name;?>-new_images_size_h">Height</label>
-						<input name="<?php echo $this->plugin_name;?>[images_size][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_h" placeholder="300"  class="small-text">
+							<label for="<?php echo $this->plugin_name;?>-new_images_size_h">Height</label>
+							<input name="<?php echo $this->plugin_name;?>[images_size][height]" type="number" step="1" min="0" id="<?php echo $this->plugin_name;?>-new_images_size_h" placeholder="300" class="small-text">
+						</div>
 						
 						<br>
 
